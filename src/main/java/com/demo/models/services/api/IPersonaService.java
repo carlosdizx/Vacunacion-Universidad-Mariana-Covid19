@@ -1,15 +1,18 @@
 package com.demo.models.services.api;
 
 import com.demo.models.entity.Eps;
+import com.demo.models.entity.Estado;
 import com.demo.models.entity.Persona;
 import com.demo.models.entity.Tipo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface IPersonaService
 {
+    //@Query("SELECT p FROM Persona p")
     List<Persona> findAll();
 
     Persona findById(Long pId );
@@ -21,4 +24,6 @@ public interface IPersonaService
     List<Tipo>findAllTipos();
 
     List<Eps>findAllEps();
+
+    List<Estado>findAllEstados();
 }

@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tipos")
-public class Tipo  implements Serializable
+@Table(name = "estados")
+public class Estado implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
@@ -14,14 +14,6 @@ public class Tipo  implements Serializable
     private int id;
 
     private String nombre;
-
-    public Tipo() {
-    }
-
-    public Tipo(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
 
     public int getId() {
         return id;

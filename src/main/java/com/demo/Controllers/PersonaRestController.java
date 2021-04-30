@@ -1,6 +1,7 @@
 package com.demo.Controllers;
 
 import com.demo.models.entity.Eps;
+import com.demo.models.entity.Estado;
 import com.demo.models.entity.Persona;
 import com.demo.models.entity.Tipo;
 import com.demo.models.services.api.IPersonaService;
@@ -28,7 +29,6 @@ public class PersonaRestController
     {
         return service.findAll();
     }
-
 
     @GetMapping("/{documento}")
     public ResponseEntity<HashMap<String,Object>> findById(@PathVariable Long documento)
@@ -67,5 +67,11 @@ public class PersonaRestController
     public List<Eps> findAllEps()
     {
         return service.findAllEps();
+    }
+
+    @GetMapping("/estados")
+    public List<Estado> findAllEstados()
+    {
+        return service.findAllEstados();
     }
 }
