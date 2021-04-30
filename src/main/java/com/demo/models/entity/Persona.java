@@ -1,4 +1,4 @@
-package simuPremium.models.entity;
+package com.demo.models.entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +8,6 @@ import java.util.Date;
 public class Persona
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long documento;
 
     @Column(nullable = false)

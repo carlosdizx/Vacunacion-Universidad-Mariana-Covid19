@@ -1,4 +1,4 @@
-package simuPremium.models.commons;
+package com.demo.models.commons;
 
 import java.io.Serializable;
 import java.util.List;
