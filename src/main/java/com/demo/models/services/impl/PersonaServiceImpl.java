@@ -2,6 +2,7 @@ package com.demo.models.services.impl;
 
 import com.demo.models.dao.IPersonaDao;
 import com.demo.models.entity.Persona;
+import com.demo.models.entity.Tipo;
 import com.demo.models.services.api.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,12 @@ public class PersonaServiceImpl implements IPersonaService
     public void delete(Long pId)
     {
         dao.deleteById(pId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Tipo> findAllTipos()
+    {
+        return dao.findAllTipos();
     }
 }

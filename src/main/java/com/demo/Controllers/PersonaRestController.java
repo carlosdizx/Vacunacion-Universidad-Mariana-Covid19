@@ -1,6 +1,7 @@
 package com.demo.Controllers;
 
 import com.demo.models.entity.Persona;
+import com.demo.models.entity.Tipo;
 import com.demo.models.services.api.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -27,6 +28,7 @@ public class PersonaRestController
         return service.findAll();
     }
 
+
     @GetMapping("/{documento}")
     public ResponseEntity<HashMap<String,Object>> findById(@PathVariable Long documento)
     {
@@ -52,5 +54,11 @@ public class PersonaRestController
             response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
             return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/tipos")
+    public List<Tipo> findAllTipos()
+    {
+        return service.findAllTipos();
     }
 }

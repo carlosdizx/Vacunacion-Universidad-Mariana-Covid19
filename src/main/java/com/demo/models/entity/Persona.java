@@ -1,13 +1,17 @@
 package com.demo.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "personas")
-public class Persona implements Serializable
-{
+public class Persona implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     private Long documento;
 
@@ -21,21 +25,26 @@ public class Persona implements Serializable
     private Date fechaNacimiento;
 
     @Column(nullable = false)
-    private int tipo;
-
-    @Column(nullable = false)
     private String sangre;
 
     @Column(nullable = false)
     private int tipo_estado;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String correo;
 
     @Column(nullable = false)
     private long celular;
 
-    public Persona(Long documento, String nombre, String apellidos, Date fechaNacimiento, int tipo, String sangre, int tipo_estado, String correo, long celular) {
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = "tipo_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Tipo tipo;
+
+    public Persona() {
+    }
+
+    public Persona(Long documento, String nombre, String apellidos, Date fechaNacimiento, Tipo tipo, String sangre, int tipo_estado, String correo, long celular) {
         this.documento = documento;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -45,9 +54,6 @@ public class Persona implements Serializable
         this.tipo_estado = tipo_estado;
         this.correo = correo;
         this.celular = celular;
-    }
-
-    public Persona() {
     }
 
     public Long getDocumento() {
@@ -82,11 +88,11 @@ public class Persona implements Serializable
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 

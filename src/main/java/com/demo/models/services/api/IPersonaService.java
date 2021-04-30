@@ -1,6 +1,7 @@
 package com.demo.models.services.api;
 
 import com.demo.models.entity.Persona;
+import com.demo.models.entity.Tipo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +16,6 @@ public interface IPersonaService
     Persona save(Persona persona);
 
     void delete( Long pId );
+
+    List<Tipo>findAllTipos();
 }
