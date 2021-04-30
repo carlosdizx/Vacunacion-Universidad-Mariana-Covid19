@@ -1,11 +1,12 @@
 package com.demo.models.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "personas")
-public class Persona
+public class Persona implements Serializable
 {
     @Id
     private Long documento;
