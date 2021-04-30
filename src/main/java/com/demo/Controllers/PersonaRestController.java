@@ -1,5 +1,6 @@
 package com.demo.Controllers;
 
+import com.demo.models.entity.Eps;
 import com.demo.models.entity.Persona;
 import com.demo.models.entity.Tipo;
 import com.demo.models.services.api.IPersonaService;
@@ -60,5 +61,11 @@ public class PersonaRestController
     public List<Tipo> findAllTipos()
     {
         return service.findAllTipos();
+    }
+
+    @GetMapping("/eps")
+    public List<Eps> findAllEps()
+    {
+        return service.findAllEps();
     }
 }

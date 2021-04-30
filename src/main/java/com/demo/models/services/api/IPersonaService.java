@@ -1,5 +1,6 @@
 package com.demo.models.services.api;
 
+import com.demo.models.entity.Eps;
 import com.demo.models.entity.Persona;
 import com.demo.models.entity.Tipo;
 import org.springframework.data.domain.Page;
@@ -18,4 +19,6 @@ public interface IPersonaService
     void delete( Long pId );
 
     List<Tipo>findAllTipos();
+
+    List<Eps>findAllEps();
 }

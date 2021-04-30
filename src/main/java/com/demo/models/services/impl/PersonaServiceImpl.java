@@ -1,6 +1,7 @@
 package com.demo.models.services.impl;
 
 import com.demo.models.dao.IPersonaDao;
+import com.demo.models.entity.Eps;
 import com.demo.models.entity.Persona;
 import com.demo.models.entity.Tipo;
 import com.demo.models.services.api.IPersonaService;
@@ -49,5 +50,11 @@ public class PersonaServiceImpl implements IPersonaService
     public List<Tipo> findAllTipos()
     {
         return dao.findAllTipos();
+    }
+
+    @Override
+    public List<Eps> findAllEps()
+    {
+        return dao.findAllEps();
     }
 }

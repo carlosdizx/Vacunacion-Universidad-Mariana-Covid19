@@ -41,6 +41,11 @@ public class Persona implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Tipo tipo;
 
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = "eps_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Eps eps;
+
     public Persona() {
     }
 

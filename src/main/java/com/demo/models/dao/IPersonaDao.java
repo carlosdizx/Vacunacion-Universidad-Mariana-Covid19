@@ -1,5 +1,6 @@
 package com.demo.models.dao;
 
+import com.demo.models.entity.Eps;
 import com.demo.models.entity.Persona;
 import com.demo.models.entity.Tipo;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,7 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
 {
     @Query("from Tipo")
     List<Tipo>findAllTipos();
+
+    @Query("from Eps")
+    List<Eps>findAllEps();
 }
