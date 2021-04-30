@@ -18,8 +18,6 @@ import java.util.Map;
 @RequestMapping("/personas")
 public class PersonaRestController
 {
-    private final static Map<String,Object> RESPONSE = new HashMap<>();
-
     @Autowired
     private IPersonaService service;
 
@@ -32,25 +30,27 @@ public class PersonaRestController
     @GetMapping("/{documento}")
     public ResponseEntity<HashMap<String,Object>> findById(@PathVariable Long documento)
     {
+
+        final Map<String,Object> response = new HashMap<>();
         try
         {
             Persona persona = service.findById(documento);
             if (persona==null)
             {
-                RESPONSE.put("Mensaje","No hay una persona con el documento: ".concat(documento.toString()));
-                return new ResponseEntity(RESPONSE, HttpStatus.OK);
+                response.put("Mensaje","No hay una persona con el documento: ".concat(documento.toString()));
+                return new ResponseEntity(response, HttpStatus.NOT_FOUND);
             }
             else
             {
-                RESPONSE.put("Persona",persona);
-                return new ResponseEntity(RESPONSE, HttpStatus.OK);
+                response.put("Persona",persona);
+                return new ResponseEntity(response, HttpStatus.OK);
             }
         }
         catch (DataAccessException e)
         {
-            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
-            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
-            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
