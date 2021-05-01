@@ -23,10 +23,6 @@ INSERT INTO tipos (nombre) VALUES ('Estudiante');
 INSERT INTO tipos (nombre) VALUES ('Docente');
 INSERT INTO tipos (nombre) VALUES ('Administrativo');
 
+INSERT INTO personas VALUES (1085,'Olaya Herrera',3008888000,'molaya@umariana.edu.co','1999-11-20','Micheal Stiven','O+',1,1,1);
 
-
-INSERT INTO personas (documento, apellidos, celular, correo, fecha_nacimiento, nombre, sangre, eps_id, estado_id, tipo_id)
-VALUES (1085,'Olaya Herrera',3008888000,'molaya@umariana.edu.co','1999-11-20','Micheal Stiven','O+',1,1,1);
-
-INSERT INTO personas (documento, apellidos, celular, correo, fecha_nacimiento, nombre, sangre, eps_id, estado_id, tipo_id)
-VALUES (1086,'Mecanico',3008888001,'javimeca@umariana.edu.co','1999-11-20','Javier','B+',2,4,3);
+INSERT INTO personas VALUES (1086,'Mecanico',3008888001,'javimeca@umariana.edu.co','1999-11-20','Javier','B+',2,4,3);

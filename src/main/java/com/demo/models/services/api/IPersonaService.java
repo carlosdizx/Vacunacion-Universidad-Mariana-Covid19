@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface IPersonaService
 {
-    //@Query("SELECT p FROM Persona p")
     List<Persona> findAll();
 
     Persona findById(Long pId );
