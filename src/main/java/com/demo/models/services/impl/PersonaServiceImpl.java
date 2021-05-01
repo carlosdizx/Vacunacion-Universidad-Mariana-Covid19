@@ -1,10 +1,7 @@
 package com.demo.models.services.impl;
 
 import com.demo.models.dao.IPersonaDao;
-import com.demo.models.entity.Eps;
-import com.demo.models.entity.Estado;
-import com.demo.models.entity.Persona;
-import com.demo.models.entity.Tipo;
+import com.demo.models.entity.*;
 import com.demo.models.services.api.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,14 +51,23 @@ public class PersonaServiceImpl implements IPersonaService
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Eps> findAllEps()
     {
         return dao.findAllEps();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Estado> findAllEstados()
     {
         return dao.findAllEstados();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Facultad> findAllFacultades()
+    {
+        return dao.findAllFacultades();
     }
 }

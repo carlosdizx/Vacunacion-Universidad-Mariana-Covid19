@@ -48,6 +48,11 @@ public class Persona implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Estado estado;
 
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = "facultdad_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Facultad facultad;
+
     public Persona() {
     }
 
@@ -129,5 +134,13 @@ public class Persona implements Serializable {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public Facultad getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
     }
 }

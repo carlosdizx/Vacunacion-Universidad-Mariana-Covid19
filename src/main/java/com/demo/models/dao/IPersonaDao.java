@@ -1,9 +1,6 @@
 package com.demo.models.dao;
 
-import com.demo.models.entity.Eps;
-import com.demo.models.entity.Estado;
-import com.demo.models.entity.Persona;
-import com.demo.models.entity.Tipo;
+import com.demo.models.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -20,6 +17,9 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
     @Query("from Eps")
     List<Eps>findAllEps();
 
-    @Query("from Estado ")
+    @Query("from Estado")
     List<Estado>findAllEstados();
+
+    @Query("from Facultad")
+    List<Facultad>findAllFacultades();
 }

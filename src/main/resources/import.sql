@@ -23,11 +23,21 @@ INSERT INTO tipos (nombre) VALUES ('Estudiante');
 INSERT INTO tipos (nombre) VALUES ('Docente');
 INSERT INTO tipos (nombre) VALUES ('Administrativo');
 
-INSERT INTO personas VALUES (1085,'Olaya Herrera',3008888000,'molaya@umariana.edu.co','1999-07-15','Micheal Stiven','O+',1,1,1);
-INSERT INTO personas VALUES (1086,'Mecanico',3008888001,'javimeca@umariana.edu.co','2000-02-07','Javier','B+',12,2,2);
-INSERT INTO personas VALUES (1087,'Díaz',3008888002,'diomedazo@umariana.edu.co','2001-03-20','Diomedez','A+',10,3,3);
-INSERT INTO personas VALUES (1088,'del Oriente',3008888003,'tigrezaoriente@umariana.edu.co','1978-06-20','La Tigreza','AB-',13,4,1);
-INSERT INTO personas VALUES (1089,'Santos',3008888004,'romeosantos@umariana.edu.co','1980-09-20','Romeo','O-',11,5,3);
-INSERT INTO personas VALUES (1090,'Gomez Ceballos',3008888010,'cebadiego@umariana.edu.co','1960-12-20','Diego Alejandro','O+',7,4,1);
-INSERT INTO personas VALUES (1091,'Molina Torres',3008888004,'adieltorres@umariana.edu.co','2002-01-20','Adrian Daniel','B+',8,2,2);
-INSERT INTO personas VALUES (1092,'Uñas',3008888004,'olgaunas@umariana.edu.co','1995-03-28','Olga','O+',2,2,2);
+INSERT INTO facultades (nombre) VALUES ('Ingeniería');
+INSERT INTO facultades (nombre) VALUES ('Ciencias de la Salud');
+INSERT INTO facultades (nombre) VALUES ('Ciencias contables, Economicas y financieras');
+INSERT INTO facultades (nombre) VALUES ('Humanidades y Ciencias y Sociales');
+INSERT INTO facultades (nombre) VALUES ('Administrativa, secretartia y logistica');
+
+
+/*
+INSERT INTO personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, eps_id, estado_id, facultdad_id, tipo_id);
+*/
+INSERT INTO personas VALUES (1085,'Olaya Herrera',3008888000,'molaya@umariana.edu.co','1999-07-15','Micheal Stiven','O+',1,1,1,1);
+INSERT INTO personas VALUES (1086,'Mecanico',3008888001,'javimeca@umariana.edu.co','2000-02-07','Javier','B+',12,2,2,2);
+INSERT INTO personas VALUES (1087,'Díaz',3008888002,'diomedazo@umariana.edu.co','2001-03-20','Diomedez','A+',10,3,4,3);
+INSERT INTO personas VALUES (1088,'del Oriente',3008888003,'tigrezaoriente@umariana.edu.co','1978-06-20','La Tigreza','AB-',13,4,3,1);
+INSERT INTO personas VALUES (1089,'Santos',3008888004,'romeosantos@umariana.edu.co','1980-09-20','Romeo','O-',11,5,1,3);
+INSERT INTO personas VALUES (1090,'Gomez Ceballos',3008888010,'cebadiego@umariana.edu.co','1960-12-20','Diego Alejandro','O+',7,4,3,1);
+INSERT INTO personas VALUES (1091,'Molina Torres',3008888004,'adieltorres@umariana.edu.co','2002-01-20','Adrian Daniel','B+',8,2,4,2);
+INSERT INTO personas VALUES (1092,'Uñas',3008888004,'olgaunas@umariana.edu.co','1995-03-28','Olga','O+',2,2,2,2);

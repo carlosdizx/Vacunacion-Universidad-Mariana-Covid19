@@ -1,9 +1,6 @@
 package com.demo.Controllers;
 
-import com.demo.models.entity.Eps;
-import com.demo.models.entity.Estado;
-import com.demo.models.entity.Persona;
-import com.demo.models.entity.Tipo;
+import com.demo.models.entity.*;
 import com.demo.models.services.api.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -73,5 +70,11 @@ public class PersonaRestController
     public List<Estado> findAllEstados()
     {
         return service.findAllEstados();
+    }
+
+    @GetMapping("/facultades")
+    public List<Facultad> findAllFacultades()
+    {
+        return service.findAllFacultades();
     }
 }

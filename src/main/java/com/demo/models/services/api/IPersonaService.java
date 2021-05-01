@@ -1,9 +1,6 @@
 package com.demo.models.services.api;
 
-import com.demo.models.entity.Eps;
-import com.demo.models.entity.Estado;
-import com.demo.models.entity.Persona;
-import com.demo.models.entity.Tipo;
+import com.demo.models.entity.*;
 
 import java.util.List;
 
@@ -22,4 +19,6 @@ public interface IPersonaService
     List<Eps>findAllEps();
 
     List<Estado>findAllEstados();
+
+    List<Facultad>findAllFacultades();
 }
