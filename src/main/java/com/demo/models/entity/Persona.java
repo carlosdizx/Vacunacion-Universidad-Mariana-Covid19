@@ -16,7 +16,7 @@ public class Persona implements Serializable {
     private Long documento;
 
     @Column(nullable = false)
-    private String nombre;
+    private String nombres;
 
     @Column(nullable = false)
     private String apellidos;
@@ -46,7 +46,7 @@ public class Persona implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "estado_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    public Estado estado;
+    private Estado estado;
 
     public Persona() {
     }
@@ -59,12 +59,12 @@ public class Persona implements Serializable {
         this.documento = documento;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
     public String getApellidos() {

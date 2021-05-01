@@ -4,9 +4,6 @@ import com.demo.models.entity.Eps;
 import com.demo.models.entity.Estado;
 import com.demo.models.entity.Persona;
 import com.demo.models.entity.Tipo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
