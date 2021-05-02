@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IPersonaDao extends JpaRepository<Persona, Long>
 {
-    @Query("from Persona ")
+    @Query("SELECT p from Persona p ORDER BY p.estado.id")
     List<Persona>findAll();
 
     @Query("from Tipo")
