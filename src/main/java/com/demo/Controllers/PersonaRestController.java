@@ -15,7 +15,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = {"*","http://localhost:4200"})
 @RestController
-@RequestMapping("/persona")
+@RequestMapping("/personas")
 public class PersonaRestController
 {
     @Autowired
@@ -76,5 +76,11 @@ public class PersonaRestController
     public List<Facultad> findAllFacultades()
     {
         return service.findAllFacultades();
+    }
+
+    @GetMapping("/docentes")
+    public List<Persona> findDocentes()
+    {
+        return service.findDocentes();
     }
 }

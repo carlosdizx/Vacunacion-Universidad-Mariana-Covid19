@@ -70,4 +70,11 @@ public class PersonaServiceImpl implements IPersonaService
     {
         return dao.findAllFacultades();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Persona> findDocentes()
+    {
+        return dao.findDocentes();
+    }
 }
