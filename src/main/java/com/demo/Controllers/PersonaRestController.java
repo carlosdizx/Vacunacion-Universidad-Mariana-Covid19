@@ -4,7 +4,6 @@ import com.demo.models.entity.*;
 import com.demo.models.services.api.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -82,5 +81,11 @@ public class PersonaRestController
     public List<Persona> findDocentes()
     {
         return service.findDocentes();
+    }
+
+    @GetMapping("/docentesPosibles")
+    public List<Persona> findPosiblesDocentes()
+    {
+        return service.findPosiblesDocentes();
     }
 }

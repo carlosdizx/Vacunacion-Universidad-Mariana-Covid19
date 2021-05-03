@@ -23,4 +23,7 @@ public interface IPersonaService
     List<Facultad>findAllFacultades();
 
     List<Persona>findDocentes();
+
+
+    List<Persona>findPosiblesDocentes();
 }

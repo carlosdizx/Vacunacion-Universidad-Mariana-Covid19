@@ -16,7 +16,7 @@ INSERT INTO eps (nombre) VALUES ('Emssanar');
 INSERT INTO estados (nombre) VALUES ('Portador');
 INSERT INTO estados (nombre) VALUES ('Sano');
 INSERT INTO estados (nombre) VALUES ('Anteriormente con covid19');
-INSERT INTO estados (nombre) VALUES ('Anteriormente vacunado, pendiente vacuna');
+INSERT INTO estados (nombre) VALUES ('Anteriormente vacunado, pendiente segunda dosis');
 INSERT INTO estados (nombre) VALUES ('Vacunado');
 
 INSERT INTO tipos (nombre) VALUES ('Estudiante');
@@ -39,7 +39,7 @@ INSERT INTO personas VALUES (1090, 'JUAN', 300888005, '6 loquesea @ umariana.edu
 INSERT INTO personas VALUES (1091, 'JOSE ANTONIO', 300888006, '7 loquesea @ umariana.edu.co', '2002-01-20 00:00:00.000000', 'JAVIER', 'B+', 8, 2, 4, 2);
 INSERT INTO personas VALUES (1086, 'MANUEL', 300888001, '2 loquesea @ umariana.edu.co', '2000-02-07 00:00:00.000000', 'ANTONIO', 'B+', 12, 2, 2, 2);
 INSERT INTO personas VALUES (1085, 'ANTONIO', 300888000, '1 loquesea @ umariana.edu.co', '1999-07-15 00:00:00.000000', 'JOSE', 'O+', 1, 1, 1, 1);
-INSERT INTO personas VALUES (1092, 'JAVIER', 300888007, '8 loquesea @ umariana.edu.co', '1995-03-28 00:00:00.000000', 'MIGUEL', 'O+', 2, 2, 1, 2);
+INSERT INTO personas VALUES (1092, 'JAVIER', 300888007, '8 loquesea @ umariana.edu.co', '1995-03-28 00:00:00.000000', 'MIGUEL', 'O+', 8, 2, 1, 2);
 INSERT INTO personas VALUES (1088, 'FRANCISCO', 300888003, '4 loquesea @ umariana.edu.co', '1978-06-20 00:00:00.000000', 'MANUEL', 'AB-', 13, 4, 3, 1);
 INSERT INTO personas VALUES (1093, 'DANIEL', 300888008, '9 loquesea @ umariana.edu.co', '1999-07-15 00:00:00.000000', 'CARLOS', 'O+', 1, 1, 1, 1);
 INSERT INTO personas VALUES (1094, 'JOSE LUIS', 300888009, '10 loquesea @ umariana.edu.co', '2000-02-07 00:00:00.000000', 'ANGEL', 'B+', 12, 2, 2, 2);
@@ -47,7 +47,7 @@ INSERT INTO personas VALUES (1095, 'FRANCISCO JAVIER', 300888010, '11 loquesea @
 INSERT INTO personas VALUES (1096, 'CARLOS', 300888011, '12 loquesea @ umariana.edu.co', '1978-06-20 00:00:00.000000', 'DAVID', 'AB-', 13, 4, 3, 1);
 INSERT INTO personas VALUES (1097, 'JESUS', 300888012, '13 loquesea @ umariana.edu.co', '1980-09-20 00:00:00.000000', 'PEDRO', 'O-', 11, 5, 5, 3);
 INSERT INTO personas VALUES (1098, 'ALEJANDRO', 300888013, '14 loquesea @ umariana.edu.co', '1960-12-20 00:00:00.000000', 'DANIEL', 'O+', 7, 1, 3, 1);
-INSERT INTO personas VALUES (1099, 'MIGUEL', 300888014, '15 loquesea @ umariana.edu.co', '2002-01-20 00:00:00.000000', 'ALEJANDRO', 'B+', 8, 2, 4, 2);
+INSERT INTO personas VALUES (1099, 'Basante', 3163930876, 'carlodiaz @ umariana.edu.co', '1998-01-13 00:00:00.000000', 'Ernesto', 'B+', 2, 3, 1, 1);
 INSERT INTO personas VALUES (10001, 'JOSE MANUEL', 300888015, '16 loquesea @ umariana.edu.co', '1995-03-28 00:00:00.000000', 'MARIA', 'O+', 2, 3, 2, 2);
 INSERT INTO personas VALUES (10002, 'RAFAEL', 300888016, '17 loquesea @ umariana.edu.co', '1999-07-15 00:00:00.000000', 'ALBERTO', 'O+', 1, 4, 1, 1);
 INSERT INTO personas VALUES (10003, 'MIGUEL ANGEL', 300888017, '18 loquesea @ umariana.edu.co', '2000-02-07 00:00:00.000000', 'RAFAEL', 'B+', 12, 5, 2, 2);
@@ -55,7 +55,7 @@ INSERT INTO personas VALUES (10004, 'PEDRO', 300888018, '19 loquesea @ umariana.
 INSERT INTO personas VALUES (10005, 'PABLO', 300888019, '20 loquesea @ umariana.edu.co', '1978-06-20 00:00:00.000000', 'PABLO', 'AB-', 13, 2, 3, 1);
 INSERT INTO personas VALUES (10006, 'ANGEL', 300888020, '21 loquesea @ umariana.edu.co', '1980-09-20 00:00:00.000000', 'JORGE', 'O-', 11, 1, 1, 3);
 INSERT INTO personas VALUES (10007, 'SERGIO', 300888021, '22 loquesea @ umariana.edu.co', '1960-12-20 00:00:00.000000', 'RAMON', 'O+', 7, 2, 3, 1);
-INSERT INTO personas  VALUES (10008, 'JOSE MARIA', 300888022, '23 loquesea @ umariana.edu.co', '2002-01-20 00:00:00.000000', 'SERGIO', 'B+', 8, 3, 4, 2);
+INSERT INTO personas VALUES (10008, 'JOSE MARIA', 300888022, '23 loquesea @ umariana.edu.co', '2002-01-20 00:00:00.000000', 'SERGIO', 'B+', 8, 3, 4, 2);
 INSERT INTO personas VALUES (10009, 'FERNANDO', 300888023, '24 loquesea @ umariana.edu.co', '1995-03-28 00:00:00.000000', 'ENRIQUE', 'O+', 2, 4, 2, 2);
 INSERT INTO personas VALUES (10011, 'JORGE', 300888024, '25 loquesea @ umariana.edu.co', '1999-07-15 00:00:00.000000', 'ANDRES', 'O+', 1, 5, 1, 1);
 INSERT INTO personas VALUES (10012, 'LUIS', 300888025, '26 loquesea @ umariana.edu.co', '2000-02-07 00:00:00.000000', 'DIEGO', 'B+', 12, 1, 2, 2);
