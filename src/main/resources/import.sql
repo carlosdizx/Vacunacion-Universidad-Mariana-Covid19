@@ -33,9 +33,9 @@ INSERT INTO facultades (nombre) VALUES ('Administrativa, secretartia y logistica
 /*
 INSERT INTO personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, eps_id, estado_id, facultdad_id, tipo_id);
 */
-INSERT INTO personas VALUES (1089, 'DAVID', 300888004, '5 loquesea @ umariana.edu.co', '1980-09-20 00:00:00.000000', 'FRANCISCO', 'O-', 11, 5, 1, 3);
-INSERT INTO personas VALUES (1087, 'JOSE', 300888002, '3 loquesea @ umariana.edu.co', '2001-03-20 00:00:00.000000', 'JUAN', 'A+', 10, 3, 4, 3);
-INSERT INTO personas VALUES (1090, 'JUAN', 300888005, '6 loquesea @ umariana.edu.co', '1960-12-20 00:00:00.000000', 'LUIS', 'O+', 7, 4, 3, 1);
+INSERT INTO personas VALUES (1089, 'DAVID', 300888004, '5 loquesea @ umariana.edu.co', '1980-09-20 00:00:00.000000', 'FRANCISCO', 'O-', 5, 1, 3);
+INSERT INTO personas VALUES (1087, 'JOSE', 300888002, '3 loquesea @ umariana.edu.co', '2001-03-20 00:00:00.000000', 'JUAN', 'A+', 3, 4, 3);
+INSERT INTO personas VALUES (1090, 'JUAN', 300888005, '6 loquesea @ umariana.edu.co', '1960-12-20 00:00:00.000000', 'LUIS', 'O+', 4, 3, 1);
 INSERT INTO personas VALUES (1091, 'JOSE ANTONIO', 300888006, '7 loquesea @ umariana.edu.co', '2002-01-20 00:00:00.000000', 'JAVIER', 'B+', 8, 2, 4, 2);
 INSERT INTO personas VALUES (1086, 'MANUEL', 300888001, '2 loquesea @ umariana.edu.co', '2000-02-07 00:00:00.000000', 'ANTONIO', 'B+', 12, 2, 2, 2);
 INSERT INTO personas VALUES (1085, 'ANTONIO', 300888000, '1 loquesea @ umariana.edu.co', '1999-07-15 00:00:00.000000', 'JOSE', 'O+', 1, 1, 1, 1);

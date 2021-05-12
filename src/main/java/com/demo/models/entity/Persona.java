@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "personas")
@@ -38,10 +39,12 @@ public class Persona implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Tipo tipo;
 
-    @ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name = "eps_id")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "convenio",
+    joinColumns = @JoinColumn(name = "persona_id"),inverseJoinColumns = @JoinColumn(name = "eps_id"),
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"persona_id","eps_id"})})
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private Eps eps;
+    private List<Eps> epss;
 
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "estado_id")
@@ -120,14 +123,6 @@ public class Persona implements Serializable {
         this.tipo = tipo;
     }
 
-    public Eps getEps() {
-        return eps;
-    }
-
-    public void setEps(Eps eps) {
-        this.eps = eps;
-    }
-
     public Estado getEstado() {
         return estado;
     }
@@ -142,5 +137,13 @@ public class Persona implements Serializable {
 
     public void setFacultad(Facultad facultad) {
         this.facultad = facultad;
+    }
+
+    public List<Eps> getEpss() {
+        return epss;
+    }
+
+    public void setEpss(List<Eps> epss) {
+        this.epss = epss;
     }
 }
