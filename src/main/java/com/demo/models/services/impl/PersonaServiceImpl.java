@@ -64,14 +64,12 @@ public class PersonaServiceImpl implements IPersonaService
         return dao.findAllEstados();
     }
 
-    /*
     @Override
     @Transactional(readOnly = true)
     public List<Facultad> findAllFacultades()
     {
         return dao.findAllFacultades();
     }
-     */
 
     @Override
     @Transactional(readOnly = true)

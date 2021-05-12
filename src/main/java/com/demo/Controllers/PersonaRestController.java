@@ -29,7 +29,6 @@ public class PersonaRestController
     @GetMapping("/{documento}")
     public ResponseEntity<HashMap<String,Object>> findById(@PathVariable Long documento)
     {
-
         final Map<String,Object> response = new HashMap<>();
         try
         {
@@ -71,13 +70,11 @@ public class PersonaRestController
         return service.findAllEstados();
     }
 
-    /*
     @GetMapping("/facultades")
     public List<Facultad> findAllFacultades()
     {
         return service.findAllFacultades();
     }
-     */
 
     @GetMapping("/docentes")
     public List<Persona> findDocentes()

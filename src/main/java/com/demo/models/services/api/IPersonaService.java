@@ -20,9 +20,7 @@ public interface IPersonaService
 
     List<Estado>findAllEstados();
 
-    /*
     List<Facultad>findAllFacultades();
-     */
 
     List<Persona>findDocentes();
 

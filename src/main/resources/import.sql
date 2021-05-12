@@ -261,6 +261,6 @@ insert into public.convenios (persona_id, eps_id) values (90, 5);
   Inserción en convenios (se agrega una o dos convenios mas para algunas personas)
  */
 INSERT INTO convenios (persona_id, eps_id) VALUES (1,2);
-INSERT INTO convenios (persona_id, eps_id) VALUES (1,10);
+INSERT INTO convenios (persona_id, eps_id) VALUES (1,13);
 INSERT INTO convenios (persona_id, eps_id) VALUES (90,2);
 INSERT INTO convenios (persona_id, eps_id) VALUES (45,2);
