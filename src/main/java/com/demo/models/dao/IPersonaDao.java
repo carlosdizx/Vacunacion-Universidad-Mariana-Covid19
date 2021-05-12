@@ -20,10 +20,12 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
     @Query("from Estado")
     List<Estado>findAllEstados();
 
+    /*
     @Query("from Facultad")
     List<Facultad>findAllFacultades();
+     */
 
-    @Query("SELECT p FROM Persona p WHERE p.tipo.id=2 ORDER BY p.facultad.nombre,p.estado.nombre")
+    @Query("SELECT p FROM Persona p WHERE p.tipo.id=2 ORDER BY p.estado.nombre")
     List<Persona>findDocentes();
 
     @Query("SELECT p FROM Persona p WHERE p.tipo.id=2 AND p.estado.id>=4")

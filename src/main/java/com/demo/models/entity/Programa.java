@@ -1,5 +1,7 @@
 package com.demo.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -14,6 +16,11 @@ public class Programa implements Serializable
     private int id;
 
     private String nombre;
+
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = "facultad_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Facultad facultad;
 
     public int getId() {
         return id;

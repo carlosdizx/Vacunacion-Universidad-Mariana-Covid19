@@ -1,7 +1,10 @@
 package com.demo.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "facultades")
@@ -14,6 +17,14 @@ public class Facultad implements Serializable
     private int id;
 
     private String nombre;
+
+    /**
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "facugrama",
+            joinColumns = @JoinColumn(name = "facultad_id"),inverseJoinColumns = @JoinColumn(name = "programa_id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"facultad_id","programa_id"})})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+     */
 
     public int getId() {
         return id;

@@ -71,11 +71,13 @@ public class PersonaRestController
         return service.findAllEstados();
     }
 
+    /*
     @GetMapping("/facultades")
     public List<Facultad> findAllFacultades()
     {
         return service.findAllFacultades();
     }
+     */
 
     @GetMapping("/docentes")
     public List<Persona> findDocentes()
