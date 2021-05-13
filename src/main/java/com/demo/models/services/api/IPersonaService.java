@@ -30,5 +30,5 @@ public interface IPersonaService
 
     List<Persona>findPosibles();
 
-    List<Persona>findFacultadPersonas(int id);
+    List<Persona>findFacultadPersonasPosibles(int id);
 }

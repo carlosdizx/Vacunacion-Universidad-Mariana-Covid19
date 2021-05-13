@@ -33,9 +33,11 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
     @Query("SELECT p FROM Persona p WHERE p.estado.id=?1 ORDER BY p.estado.id")
     List<Persona>findEstadosPersonas(int id);
 
-    @Query("SELECT p FROM Persona p WHERE p.estado.id=?1 AND (p.estado.id>=5) ORDER BY p.estado.id")
-    List<Persona>findFacultadPersonas(int id);
-
     @Query("SELECT p FROM Persona p WHERE p.estado.id>4 ORDER BY p.tipo.id,p.estado.id")
     List<Persona>findPosibles();
+
+    @Query("SELECT p FROM Persona p" +
+            "   INNER JOIN Programa p2 ON p2.id= p.programa.id " +
+            " WHERE p.estado.id>=5 AND p2.facultad.id=?1 ORDER BY p.estado.id")
+    List<Persona>findFacultadPersonasPosibles(int id);
 }

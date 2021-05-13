@@ -98,8 +98,8 @@ public class PersonaServiceImpl implements IPersonaService
     }
     @Override
     @Transactional(readOnly = true)
-    public List<Persona>findFacultadPersonas(int id)
+    public List<Persona>findFacultadPersonasPosibles(int id)
     {
-        return dao.findFacultadPersonas(id);
+        return dao.findFacultadPersonasPosibles(id);
     }
 }

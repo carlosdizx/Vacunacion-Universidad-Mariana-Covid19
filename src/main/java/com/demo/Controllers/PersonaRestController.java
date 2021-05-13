@@ -135,9 +135,9 @@ public class PersonaRestController
     }
 
     @GetMapping("/facultades/{id}")
-    public List<Persona>findFacultadPersonas(@PathVariable int id)
+    public List<Persona>findFacultadPersonasPosibles(@PathVariable int id)
     {
-        return service.findFacultadPersonas(id);
+        return service.findFacultadPersonasPosibles(id);
     }
 
     @GetMapping("/posibles")
@@ -260,12 +260,12 @@ public class PersonaRestController
         try
         {
             final int total = service.findPosibles().size();
-            final int educacion = service.findFacultadPersonas(1).size();
-            final int ingenieria = service.findFacultadPersonas(2).size();
-            final int salud = service.findFacultadPersonas(3).size();
-            final int contables = service.findFacultadPersonas(4).size();
-            final int humanidades = service.findFacultadPersonas(5).size();
-            final int administrativas = service.findFacultadPersonas(6).size();
+            final int educacion = service.findFacultadPersonasPosibles(1).size();
+            final int ingenieria = service.findFacultadPersonasPosibles(2).size();
+            final int salud = service.findFacultadPersonasPosibles(3).size();
+            final int contables = service.findFacultadPersonasPosibles(4).size();
+            final int humanidades = service.findFacultadPersonasPosibles(5).size();
+            final int administrativas = service.findFacultadPersonasPosibles(6).size();
             if(total!=(educacion+ingenieria+salud+contables+humanidades+administrativas) || total <=0)
             {
                 RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
