@@ -20,6 +20,8 @@ public class PersonaRestController
 {
     final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###.##");
 
+    final static Map<String,Object> RESPONSE = new HashMap<>();
+
     @Autowired
     private IPersonaService service;
 
@@ -32,26 +34,26 @@ public class PersonaRestController
     @GetMapping("/{documento}")
     public ResponseEntity<HashMap<String,Object>> findById(@PathVariable Long documento)
     {
-        final Map<String,Object> response = new HashMap<>();
+        RESPONSE.clear();
         try
         {
             Persona persona = service.findById(documento);
             if (persona==null)
             {
-                response.put("Mensaje","No hay una persona con el documento: ".concat(documento.toString()));
-                return new ResponseEntity(response, HttpStatus.NOT_FOUND);
+                RESPONSE.put("Mensaje","No hay una persona con el documento: ".concat(documento.toString()));
+                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
             else
             {
-                response.put("Persona",persona);
-                return new ResponseEntity(response, HttpStatus.OK);
+                RESPONSE.put("Persona",persona);
+                return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
         }
         catch (DataAccessException e)
         {
-            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
-            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
-            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -64,23 +66,23 @@ public class PersonaRestController
     @GetMapping("/tipos/{id}")
     public ResponseEntity<HashMap<String,Object>> findTiposPersonas(@PathVariable int id)
     {
-        final Map<String,Object> response = new HashMap<>();
+        RESPONSE.clear();
         try
         {
             final List<Persona> listado = service.findTiposPersonas(id);
             if (listado.isEmpty())
             {
-                response.put("Mensaje","No hay personas del tipo: '"+id+"'");
-                return new ResponseEntity(response, HttpStatus.NOT_FOUND);
+                RESPONSE.put("Mensaje","No hay personas del tipo: '"+id+"'");
+                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            response.put("Lista",listado);
-            return new ResponseEntity(response, HttpStatus.OK);
+            RESPONSE.put("Lista",listado);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
         {
-            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
-            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
-            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -99,23 +101,23 @@ public class PersonaRestController
     @GetMapping("/estados/{id}")
     public ResponseEntity<HashMap<String,Object>> findEstadosPersonas(@PathVariable int id)
     {
-        final Map<String,Object> response = new HashMap<>();
+        RESPONSE.clear();
         try
         {
             final List<Persona> listado = service.findEstadosPersonas(id);
             if (listado.isEmpty())
             {
-                response.put("Mensaje","No hay personas en el estado: '"+id+"'");
-                return new ResponseEntity(response, HttpStatus.NOT_FOUND);
+                RESPONSE.put("Mensaje","No hay personas en el estado: '"+id+"'");
+                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            response.put("Lista",listado);
-            return new ResponseEntity(response, HttpStatus.OK);
+            RESPONSE.put("Lista",listado);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
         {
-            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
-            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
-            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -126,15 +128,32 @@ public class PersonaRestController
     }
 
     @GetMapping("/posibles")
-    public List<Persona> findPosibles()
+    public ResponseEntity<HashMap<String,Object>> findPosibles()
     {
-        return service.findPosibles();
+        RESPONSE.clear();
+        try
+        {
+            final List<Persona> listado = service.findPosibles();
+            if (listado.isEmpty())
+            {
+                RESPONSE.put("Mensaje","No hay personas que puedan asistir a la Universidad");
+                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            RESPONSE.put("Lista",listado);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/graficas/1")
     public ResponseEntity<HashMap<String,Object>> graficOne()
     {
-        final Map<String,Object> response = new HashMap<>();
+        RESPONSE.clear();
         try
         {
             final int total = list().size();
@@ -145,34 +164,34 @@ public class PersonaRestController
             final int posibles = service.findPosibles().size();
             if( total<=0 || total!=(estudiantes+docentes+administrativos+directivos) )
             {
-                response.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
-                return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
+                RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
+                return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
             }
             final String estudiantesPor = DECIMAL_FORMAT.format((double) 100*estudiantes/total);
             final String docentesPor = DECIMAL_FORMAT.format((double)100*docentes/total);
             final String administrativosPor = DECIMAL_FORMAT.format((double)100*administrativos/total);
             final String directivosPor = DECIMAL_FORMAT.format((double)100*directivos/total);
             final String posiblesPor = DECIMAL_FORMAT.format((double)100*posibles/total);
-            response.put("Total 100%",total);
-            response.put("Estudiantes "+estudiantesPor+"%",estudiantes);
-            response.put("Docentes "+docentesPor+"%",docentes);
-            response.put("Administrativos "+administrativosPor+"%",administrativos);
-            response.put("Directivos "+directivosPor+"%",directivos);
-            response.put("Posibles "+posiblesPor+"%",posibles);
-            return new ResponseEntity(response, HttpStatus.OK);
+            RESPONSE.put("Total 100%",total);
+            RESPONSE.put("Estudiantes "+estudiantesPor+"%",estudiantes);
+            RESPONSE.put("Docentes "+docentesPor+"%",docentes);
+            RESPONSE.put("Administrativos "+administrativosPor+"%",administrativos);
+            RESPONSE.put("Directivos "+directivosPor+"%",directivos);
+            RESPONSE.put("Posibles "+posiblesPor+"%",posibles);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
         {
-            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
-            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
-            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/graficas/2")
     public ResponseEntity<HashMap<String,Object>> graficTwo()
     {
-        final Map<String,Object> response = new HashMap<>();
+        RESPONSE.clear();
         try
         {
             final int total = list().size();
@@ -184,9 +203,9 @@ public class PersonaRestController
             final int vacunados = service.findEstadosPersonas(6).size();
             if( total<=0 || total!=(desconocidos+contagiados+saludabes+preContagiados+preVacunados+vacunados) )
             {
-                response.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
-                response.put("Mensaje2","Total personas: "+total+", sumatoria: "+(desconocidos+contagiados+saludabes+preContagiados+preVacunados+vacunados));
-                return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
+                RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
+                RESPONSE.put("Mensaje2","Total personas: "+total+", sumatoria: "+(desconocidos+contagiados+saludabes+preContagiados+preVacunados+vacunados));
+                return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
             }
             final String desconocidosPor = DECIMAL_FORMAT.format((double) 100*desconocidos/total);
             final String contagiosPor = DECIMAL_FORMAT.format((double) 100*contagiados/total);
@@ -194,27 +213,27 @@ public class PersonaRestController
             final String preContagiadosPor = DECIMAL_FORMAT.format((double) 100*preContagiados/total);
             final String preVacunadosPor = DECIMAL_FORMAT.format((double) 100*preVacunados/total);
             final String vacunadosPor = DECIMAL_FORMAT.format((double) 100*vacunados/total);
-            response.put("Total 100%",total);
-            response.put("Desconocidos "+desconocidosPor+"%",desconocidos);
-            response.put("Contagiados "+contagiosPor+"%",contagiados);
-            response.put("Saludables "+saludablesPor+"%",saludabes);
-            response.put("Anteriormente contagiados "+preContagiadosPor+"%",preContagiados);
-            response.put("Pendiente segunda dosis "+preVacunadosPor+"%",preVacunados);
-            response.put("Vacunados "+vacunadosPor+"%",vacunados);
-            return new ResponseEntity(response, HttpStatus.OK);
+            RESPONSE.put("Total 100%",total);
+            RESPONSE.put("Desconocidos "+desconocidosPor+"%",desconocidos);
+            RESPONSE.put("Contagiados "+contagiosPor+"%",contagiados);
+            RESPONSE.put("Saludables "+saludablesPor+"%",saludabes);
+            RESPONSE.put("Anteriormente contagiados "+preContagiadosPor+"%",preContagiados);
+            RESPONSE.put("Pendiente segunda dosis "+preVacunadosPor+"%",preVacunados);
+            RESPONSE.put("Vacunados "+vacunadosPor+"%",vacunados);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
         {
-            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
-            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
-            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/graficas/3")
     public ResponseEntity<HashMap<String,Object>> graficThree()
     {
-        final Map<String,Object> response = new HashMap<>();
+        RESPONSE.clear();
         try
         {
             final int total = list().size();
@@ -226,9 +245,9 @@ public class PersonaRestController
             final int administrativas = service.findFacultadPersonas(6).size();
             if(total!=(educacion+ingenieria+salud+contables+humanidades+administrativas) || total <=0)
             {
-                response.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
-                response.put("Mensaje2","Total personas: "+total+", sumatoria: "+(educacion+ingenieria+salud+contables+humanidades+administrativas));
-                return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
+                RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
+                RESPONSE.put("Mensaje2","Total personas: "+total+", sumatoria: "+(educacion+ingenieria+salud+contables+humanidades+administrativas));
+                return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
             }
             final String educacionPor = DECIMAL_FORMAT.format((double) 100*educacion/total);
             final String ingenieriaPor = DECIMAL_FORMAT.format((double) 100*ingenieria/total);
@@ -236,20 +255,20 @@ public class PersonaRestController
             final String contablesPor = DECIMAL_FORMAT.format((double) 100*contables/total);
             final String humanidadesPor = DECIMAL_FORMAT.format((double) 100*humanidades/total);
             final String administrativasPor = DECIMAL_FORMAT.format((double) 100*administrativas/total);
-            response.put("Total 100%",total);
-            response.put("Educación "+educacionPor+"%",educacion);
-            response.put("Ingeniería "+ingenieriaPor+"%",ingenieria);
-            response.put("Salud "+saludPor+"%",salud);
-            response.put("Contables, Economicas y financieras "+contablesPor+"%",contables);
-            response.put("Humanidades y Sociales "+humanidadesPor+"%",humanidades);
-            response.put("Administración "+administrativasPor+"%",administrativas);
-            return new ResponseEntity(response, HttpStatus.OK);
+            RESPONSE.put("Total 100%",total);
+            RESPONSE.put("Educación "+educacionPor+"%",educacion);
+            RESPONSE.put("Ingeniería "+ingenieriaPor+"%",ingenieria);
+            RESPONSE.put("Salud "+saludPor+"%",salud);
+            RESPONSE.put("Contables, Economicas y financieras "+contablesPor+"%",contables);
+            RESPONSE.put("Humanidades y Sociales "+humanidadesPor+"%",humanidades);
+            RESPONSE.put("Administración "+administrativasPor+"%",administrativas);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
         {
-            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
-            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
-            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
