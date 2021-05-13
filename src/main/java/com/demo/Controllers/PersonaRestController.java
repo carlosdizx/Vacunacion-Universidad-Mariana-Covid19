@@ -76,15 +76,57 @@ public class PersonaRestController
         return service.findAllFacultades();
     }
 
-    @GetMapping("/docentes")
-    public List<Persona> findDocentes()
+    @GetMapping("/tipos/{id}")
+    public ResponseEntity<HashMap<String,Object>> findTiposPersonas(@PathVariable int id)
     {
-        return service.findDocentes();
+        final Map<String,Object> response = new HashMap<>();
+        try
+        {
+            final List<Persona> listado = service.findTiposPersonas(id);
+            if (listado.isEmpty())
+            {
+                response.put("Mensaje","No hay personas del tipo '"+id+"'");
+                return new ResponseEntity(response, HttpStatus.NOT_FOUND);
+            }
+            response.put("Lista",listado);
+            return new ResponseEntity(response, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        /*
+        //return service.findTiposPersonas(id);
+        final Map<String,Object> response = new HashMap<>();
+        try
+        {
+            Persona persona = service.findById(documento);
+            if (persona==null)
+            {
+                response.put("Mensaje","No hay una persona con el documento: ".concat(documento.toString()));
+                return new ResponseEntity(response, HttpStatus.NOT_FOUND);
+            }
+            else
+            {
+                response.put("Persona",persona);
+                return new ResponseEntity(response, HttpStatus.OK);
+            }
+        }
+        catch (DataAccessException e)
+        {
+            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+         */
+
     }
 
-    @GetMapping("/docentesPosibles")
-    public List<Persona> findPosiblesDocentes()
+    @GetMapping("/posibles")
+    public List<Persona> findPosibles()
     {
-        return service.findPosiblesDocentes();
+        return service.findPosibles();
     }
 }
