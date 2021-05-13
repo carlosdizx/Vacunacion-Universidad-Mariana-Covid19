@@ -1,13 +1,13 @@
 package com.demo.models.dao;
 
 import com.demo.models.entity.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IPersonaDao extends CrudRepository<Persona, Long>
+public interface IPersonaDao extends JpaRepository<Persona, Long>
 {
     @Query("SELECT p from Persona p ORDER BY p.estado.id")
     List<Persona> findAll();
@@ -29,6 +29,9 @@ public interface IPersonaDao extends CrudRepository<Persona, Long>
 
     @Query("SELECT p FROM Persona p WHERE p.estado.id=?1 ORDER BY p.estado.id")
     List<Persona>findEstadosPersonas(int id);
+
+    @Query("SELECT p FROM Persona p WHERE p.estado.id=?1 ORDER BY p.estado.id")
+    List<Persona>findFacultadPersonas(int id);
 
     @Query("SELECT p FROM Persona p WHERE p.estado.id>4 ORDER BY p.tipo.id,p.estado.id")
     List<Persona>findPosibles();

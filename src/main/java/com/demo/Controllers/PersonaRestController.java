@@ -210,4 +210,46 @@ public class PersonaRestController
             return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/graficas/3")
+    public ResponseEntity<HashMap<String,Object>> graficThree()
+    {
+        final Map<String,Object> response = new HashMap<>();
+        try
+        {
+            final int total = list().size();
+            final int educacion = service.findFacultadPersonas(1).size();
+            final int ingenieria = service.findFacultadPersonas(2).size();
+            final int salud = service.findFacultadPersonas(3).size();
+            final int contables = service.findFacultadPersonas(4).size();
+            final int humanidades = service.findFacultadPersonas(5).size();
+            final int administrativas = service.findFacultadPersonas(6).size();
+            if(total!=(educacion+ingenieria+salud+contables+humanidades+administrativas) || total <=0)
+            {
+                response.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
+                response.put("Mensaje2","Total personas: "+total+", sumatoria: "+(educacion+ingenieria+salud+contables+humanidades+administrativas));
+                return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            final String educacionPor = DECIMAL_FORMAT.format((double) 100*educacion/total);
+            final String ingenieriaPor = DECIMAL_FORMAT.format((double) 100*ingenieria/total);
+            final String saludPor = DECIMAL_FORMAT.format((double) 100*salud/total);
+            final String contablesPor = DECIMAL_FORMAT.format((double) 100*contables/total);
+            final String humanidadesPor = DECIMAL_FORMAT.format((double) 100*humanidades/total);
+            final String administrativasPor = DECIMAL_FORMAT.format((double) 100*administrativas/total);
+            response.put("Total 100%",total);
+            response.put("Educación "+educacionPor+"%",educacion);
+            response.put("Ingeniería "+ingenieriaPor+"%",ingenieria);
+            response.put("Salud "+saludPor+"%",salud);
+            response.put("Contables, Economicas y financieras "+contablesPor+"%",contables);
+            response.put("Humanidades y Sociales "+humanidadesPor+"%",humanidades);
+            response.put("Administración "+administrativasPor+"%",administrativas);
+            return new ResponseEntity(response, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            response.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(response,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

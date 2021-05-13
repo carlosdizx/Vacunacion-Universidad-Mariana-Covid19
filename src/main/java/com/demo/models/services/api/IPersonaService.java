@@ -27,4 +27,6 @@ public interface IPersonaService
     List<Persona>findEstadosPersonas(int id);
 
     List<Persona>findPosibles();
+
+    List<Persona>findFacultadPersonas(int id);
 }

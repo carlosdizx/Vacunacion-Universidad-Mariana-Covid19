@@ -91,4 +91,10 @@ public class PersonaServiceImpl implements IPersonaService
     {
         return dao.findPosibles();
     }
+    @Override
+    @Transactional(readOnly = true)
+    public List<Persona>findFacultadPersonas(int id)
+    {
+        return dao.findFacultadPersonas(id);
+    }
 }
