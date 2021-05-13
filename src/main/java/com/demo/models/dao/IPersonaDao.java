@@ -24,16 +24,6 @@ public interface IPersonaDao extends CrudRepository<Persona, Long>
     @Query("from Facultad")
     List<Facultad> findAllFacultades();
 
-    /**
-     *
-     * SELECT p.nombres,p.apellidos,e.nombre,p2.nombre FROM personas p
-     *     INNER JOIN programas p2 on p2.id = p.programa_id
-     *     INNER JOIN estados e on e.id = p.estado_id
-     * WHERE p2.id=1;
-     */
-    @Query("SELECT p from Persona p INNER JOIN Programa p2 on p2.id = p.programa.id WHERE p2.id=?1")
-    List<Facultad>findProgramaById(int id);
-
     @Query("SELECT p FROM Persona p WHERE p.tipo.id=?1 ORDER BY p.estado.id")
     List<Persona>findTiposPersonas(int id);
 
