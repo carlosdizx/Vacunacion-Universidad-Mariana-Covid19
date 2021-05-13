@@ -80,6 +80,13 @@ public class PersonaServiceImpl implements IPersonaService
 
     @Override
     @Transactional(readOnly = true)
+    public List<Persona> findEstadosPersonas(int id)
+    {
+        return dao.findEstadosPersonas(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Persona> findPosibles()
     {
         return dao.findPosibles();
