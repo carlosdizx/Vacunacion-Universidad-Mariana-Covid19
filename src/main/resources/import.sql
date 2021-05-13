@@ -72,7 +72,7 @@ INSERT INTO programas (nombre, facultad_id) VALUES ('Administración universitar
 /**
   Insercón en personas
  */
-insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (1, 'Apellido 1', 3163930876, '1 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 1', 'B+', 6, 12, 4);
+insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (1, 'Apellido 1', 3163930876, '1 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 1', 'B+', 6, 1, 4);
 insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (2, 'Apellido 2', 3163930877, '2 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 2', 'O+', 6, 11, 3);
 insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (3, 'Apellido 3', 3163930878, '3 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 3', 'A+', 2, 6, 1);
 insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (4, 'Apellido 4', 3163930879, '4 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 4', 'AB+', 6, 2, 3);
@@ -160,8 +160,8 @@ insert into public.personas (documento, apellidos, celular, correo, fecha_nacimi
 insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (86, 'Apellido 86', 3163930961, '86 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 86', 'O-', 6, 10, 4);
 insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (87, 'Apellido 87', 3163930962, '87 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 87', 'A-', 5, 10, 2);
 insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (88, 'Apellido 88', 3163930963, '88 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 88', 'B-', 1, 6, 3);
-insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (89, 'Apellido 89', 3163930964, '89 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 89', 'O-', 4, 13, 3);
-insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (90, 'Apellido 90', 3163930965, '90 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 90', 'A-', 4, 18, 1);
+insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (89, 'Apellido 89', 3163930964, '89 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 89', 'O-', 6, 13, 3);
+insert into public.personas (documento, apellidos, celular, correo, fecha_nacimiento, nombres, sangre, estado_id, programa_id, tipo_id) values (90, 'Apellido 90', 3163930965, '90 correo@umariana.edu.co', '2000-01-13 00:00:00.000000', 'Nombre 90', 'A-', 5, 2, 1);
 
 /**
   Insercón en convenios (se añade a 1 persona con una eps como minimo)

@@ -123,6 +123,14 @@ public class Persona implements Serializable {
         this.tipo = tipo;
     }
 
+    public List<Eps> getEpss() {
+        return epss;
+    }
+
+    public void setEpss(List<Eps> epss) {
+        this.epss = epss;
+    }
+
     public Estado getEstado() {
         return estado;
     }
@@ -131,11 +139,11 @@ public class Persona implements Serializable {
         this.estado = estado;
     }
 
-    public List<Eps> getEpss() {
-        return epss;
+    public Programa getPrograma() {
+        return programa;
     }
 
-    public void setEpss(List<Eps> epss) {
-        this.epss = epss;
+    public void setPrograma(Programa programa) {
+        this.programa = programa;
     }
 }

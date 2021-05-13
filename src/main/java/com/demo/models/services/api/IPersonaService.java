@@ -22,6 +22,8 @@ public interface IPersonaService
 
     List<Facultad>findAllFacultades();
 
+    List<Programa>findAllProgramas();
+
     List<Persona>findTiposPersonas(int id);
 
     List<Persona>findEstadosPersonas(int id);

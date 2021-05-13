@@ -4,6 +4,7 @@ import com.demo.models.entity.*;
 import com.demo.models.services.api.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +56,12 @@ public class PersonaRestController
             RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
             return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/programas")
+    public List<Programa>findAllProgramas()
+    {
+        return service.findAllProgramas();
     }
 
     @GetMapping("/tipos")
@@ -127,6 +134,12 @@ public class PersonaRestController
         return service.findAllFacultades();
     }
 
+    @GetMapping("/facultades/{id}")
+    public List<Persona>findFacultadPersonas(@PathVariable int id)
+    {
+        return service.findFacultadPersonas(id);
+    }
+
     @GetMapping("/posibles")
     public ResponseEntity<HashMap<String,Object>> findPosibles()
     {
@@ -148,6 +161,16 @@ public class PersonaRestController
             RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
             return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/graficas")
+    public ResponseEntity<HashMap<String,Object>> graficas()
+    {
+        final HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("Grafico 1",graficOne().getBody());
+        hashMap.put("Grafico 2",graficTwo().getBody());
+        hashMap.put("Grafico 3",graficThree().getBody());
+        return new ResponseEntity(hashMap, HttpStatus.OK);
     }
 
     @GetMapping("/graficas/1")
@@ -236,7 +259,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = list().size();
+            final int total = service.findPosibles().size();
             final int educacion = service.findFacultadPersonas(1).size();
             final int ingenieria = service.findFacultadPersonas(2).size();
             final int salud = service.findFacultadPersonas(3).size();
