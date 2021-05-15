@@ -266,26 +266,26 @@ public class PersonaRestController
             final int contables = service.findFacultadPersonasPosibles(4).size();
             final int humanidades = service.findFacultadPersonasPosibles(5).size();
             final int administrativas = service.findFacultadPersonasPosibles(6).size();
-            if(total!=(educacion+ingenieria+salud+contables+humanidades+administrativas) || total <=0)
-            {
-                RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
-                RESPONSE.put("Mensaje2","Total personas: "+total+", sumatoria: "+(educacion+ingenieria+salud+contables+humanidades+administrativas));
+            if (total == (educacion + ingenieria + salud + contables + humanidades + administrativas) && total > 0) {
+                final String educacionPor = DECIMAL_FORMAT.format((double) 100 * educacion / total);
+                final String ingenieriaPor = DECIMAL_FORMAT.format((double) 100 * ingenieria / total);
+                final String saludPor = DECIMAL_FORMAT.format((double) 100 * salud / total);
+                final String contablesPor = DECIMAL_FORMAT.format((double) 100 * contables / total);
+                final String humanidadesPor = DECIMAL_FORMAT.format((double) 100 * humanidades / total);
+                final String administrativasPor = DECIMAL_FORMAT.format((double) 100 * administrativas / total);
+                RESPONSE.put("Total 100%", total);
+                RESPONSE.put("Educación " + educacionPor + "%", educacion);
+                RESPONSE.put("Ingeniería " + ingenieriaPor + "%", ingenieria);
+                RESPONSE.put("Salud " + saludPor + "%", salud);
+                RESPONSE.put("Contables, Economicas y financieras " + contablesPor + "%", contables);
+                RESPONSE.put("Humanidades y Sociales " + humanidadesPor + "%", humanidades);
+                RESPONSE.put("Administración " + administrativasPor + "%", administrativas);
+                return new ResponseEntity(RESPONSE, HttpStatus.OK);
+            } else {
+                RESPONSE.put("Mensaje", "No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
+                RESPONSE.put("Mensaje2", "Total personas: " + total + ", sumatoria: " + (educacion + ingenieria + salud + contables + humanidades + administrativas));
                 return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            final String educacionPor = DECIMAL_FORMAT.format((double) 100*educacion/total);
-            final String ingenieriaPor = DECIMAL_FORMAT.format((double) 100*ingenieria/total);
-            final String saludPor = DECIMAL_FORMAT.format((double) 100*salud/total);
-            final String contablesPor = DECIMAL_FORMAT.format((double) 100*contables/total);
-            final String humanidadesPor = DECIMAL_FORMAT.format((double) 100*humanidades/total);
-            final String administrativasPor = DECIMAL_FORMAT.format((double) 100*administrativas/total);
-            RESPONSE.put("Total 100%",total);
-            RESPONSE.put("Educación "+educacionPor+"%",educacion);
-            RESPONSE.put("Ingeniería "+ingenieriaPor+"%",ingenieria);
-            RESPONSE.put("Salud "+saludPor+"%",salud);
-            RESPONSE.put("Contables, Economicas y financieras "+contablesPor+"%",contables);
-            RESPONSE.put("Humanidades y Sociales "+humanidadesPor+"%",humanidades);
-            RESPONSE.put("Administración "+administrativasPor+"%",administrativas);
-            return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
         {

@@ -31,10 +31,4 @@ public interface IPersonaService
     List<Persona>findPosibles();
 
     List<Persona>findFacultadPersonasPosibles(int id);
-
-    int countPersonasEstudiante();
-    int countPersonasDocente();
-    int countPersonasAdministrativos();
-    int countPersonasDirectivos();
-    int countPersonasPosibles();
 }
