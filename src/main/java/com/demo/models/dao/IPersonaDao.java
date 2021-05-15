@@ -40,4 +40,17 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
             "   INNER JOIN Programa p2 ON p2.id= p.programa.id " +
             " WHERE p.estado.id>=5 AND p2.facultad.id=?1 ORDER BY p.estado.id")
     List<Persona>findFacultadPersonasPosibles(int id);
+
+    /**
+     * SELECT count(*) AS cantiada,e.nombre,t.nombre FROM personas p
+     *     INNER JOIN estados e on e.id = p.estado_id
+     *     INNER JOIN tipos t on t.id = p.tipo_id
+     * WHERE p.estado_id>=5
+     * GROUP BY t.nombre,e.nombre;
+     */
+    @Query("SELECT count(p) AS cantidad,e.nombre AS estado,t.nombre AS tipo_persona FROM Persona p " +
+            "INNER JOIN Estado e  ON e.id=p.estado.id " +
+            "INNER JOIN Tipo t  ON t.id=p.tipo.id " +
+            "GROUP BY t.nombre,e.nombre")
+    List<?> countPosiblesTipos();
 }

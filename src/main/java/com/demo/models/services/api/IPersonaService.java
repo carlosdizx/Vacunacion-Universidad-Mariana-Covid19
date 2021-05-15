@@ -31,4 +31,6 @@ public interface IPersonaService
     List<Persona>findPosibles();
 
     List<Persona>findFacultadPersonasPosibles(int id);
+
+    List<?> countPosiblesTipos();
 }

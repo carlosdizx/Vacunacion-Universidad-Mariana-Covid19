@@ -294,4 +294,27 @@ public class PersonaRestController
             return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/graficas/4")
+    public ResponseEntity<HashMap<String,Object>> graficFour()
+    {
+        RESPONSE.clear();
+        try
+        {
+            final List<?> listado = service.countPosiblesTipos();
+            if (listado.isEmpty())
+            {
+                RESPONSE.put("Mensaje", "No hay datos en la base de datos!");
+                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            RESPONSE.put("Listado",listado);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
