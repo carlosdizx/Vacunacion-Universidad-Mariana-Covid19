@@ -35,7 +35,7 @@ public class PersonaRestController
         for (int i = 0 ; i < list.size() ; i++)
         {
             final Object[] o = (Object[]) list.get(i);
-            listSencilla.add(new PersonaSencilla((Long) o[0], (String) o[1],(String)o[2],(String)o[3]));
+            listSencilla.add(new PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
         }
         return listSencilla;
     }

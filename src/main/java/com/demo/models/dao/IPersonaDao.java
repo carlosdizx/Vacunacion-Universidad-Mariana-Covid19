@@ -11,7 +11,7 @@ public interface IPersonaDao extends CrudRepository<Persona, Long>
 {
     PersonaSencilla sencilla = null;
 
-    @Query("SELECT p.documento, p.tipo.nombre,p.programa.nombre,p.estado.nombre from Persona AS p ORDER BY p.estado.id,p.programa.id")
+    @Query("SELECT p.documento, p.tipo,p.programa,p.estado from Persona AS p ORDER BY p.estado.id,p.programa.id")
     List<?> findAllData();
 
     @Query("from Tipo")
