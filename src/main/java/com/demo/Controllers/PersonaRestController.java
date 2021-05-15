@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,14 @@ public class PersonaRestController
     @GetMapping("/all")
     public List<?> findAllData()
     {
-        return service.findAllData();
+        final List<?> list = service.findAllData();
+        final List<PersonaSencilla> listSencilla = new ArrayList<>();
+        for (int i = 0 ; i < list.size() ; i++)
+        {
+            final Object[] o = (Object[]) list.get(i);
+            listSencilla.add(new PersonaSencilla((Long) o[0], (String) o[1],(String)o[2],(String)o[3]));
+        }
+        return listSencilla;
     }
 
     @GetMapping("/{documento}")
@@ -179,7 +187,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = findAllData().size();
+            final int total = service.findAllData().size();
             final int estudiantes = service.findTiposPersonas(1).size();
             final int docentes = service.findTiposPersonas(2).size();
             final int administrativos = service.findTiposPersonas(3).size();
@@ -217,7 +225,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = findAllData().size();
+            final int total = service.findAllData().size();
             final int desconocidos = service.findEstadosPersonas(1).size();
             final int contagiados = service.findEstadosPersonas(2).size();
             final int saludabes = service.findEstadosPersonas(3).size();
