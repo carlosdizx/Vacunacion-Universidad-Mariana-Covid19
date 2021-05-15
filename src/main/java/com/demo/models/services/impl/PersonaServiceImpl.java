@@ -17,9 +17,9 @@ public class PersonaServiceImpl implements IPersonaService
 
     @Override
     @Transactional(readOnly = true)
-    public List<Persona> findAll()
+    public List<?> findAllData()
     {
-        return dao.findAll();
+        return dao.findAllData();
     }
 
     @Override

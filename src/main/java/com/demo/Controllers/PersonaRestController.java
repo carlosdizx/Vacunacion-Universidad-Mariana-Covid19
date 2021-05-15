@@ -27,9 +27,9 @@ public class PersonaRestController
     private IPersonaService service;
 
     @GetMapping("/all")
-    public List<Persona> list()
+    public List<?> findAllData()
     {
-        return service.findAll();
+        return service.findAllData();
     }
 
     @GetMapping("/{documento}")
@@ -179,7 +179,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = list().size();
+            final int total = findAllData().size();
             final int estudiantes = service.findTiposPersonas(1).size();
             final int docentes = service.findTiposPersonas(2).size();
             final int administrativos = service.findTiposPersonas(3).size();
@@ -217,7 +217,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = list().size();
+            final int total = findAllData().size();
             final int desconocidos = service.findEstadosPersonas(1).size();
             final int contagiados = service.findEstadosPersonas(2).size();
             final int saludabes = service.findEstadosPersonas(3).size();

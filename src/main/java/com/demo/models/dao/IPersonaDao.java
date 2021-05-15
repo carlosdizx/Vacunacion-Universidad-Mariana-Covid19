@@ -5,12 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IPersonaDao extends JpaRepository<Persona, Long>
 {
-    @Query("SELECT p from Persona p ORDER BY p.estado.id")
-    List<Persona> findAll();
+    @Query("SELECT p.documento AS documento,p.tipo.nombre AS tipo,p.programa.nombre AS programa,p.estado.nombre AS estado from Persona p ORDER BY p.estado.id,p.programa.id")
+    List<?> findAllData();
 
     @Query("from Tipo")
     List<Tipo> findAllTipos();
