@@ -99,9 +99,9 @@ public class PersonaServiceImpl implements IPersonaService
 
     @Override
     @Transactional(readOnly = true)
-    public List<Persona> findPosibles()
+    public List<?> findPersoonasPosibleAsistencia()
     {
-        return dao.findPosibles();
+        return dao.findPersoonasPosibleAsistencia();
     }
     @Override
     @Transactional(readOnly = true)

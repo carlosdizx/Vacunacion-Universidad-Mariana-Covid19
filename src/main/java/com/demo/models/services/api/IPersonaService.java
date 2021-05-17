@@ -30,7 +30,7 @@ public interface IPersonaService
 
     List<Persona>findEstadosPersonas(int id);
 
-    List<Persona>findPosibles();
+    List<?>findPersoonasPosibleAsistencia();
 
     List<Persona>findFacultadPersonasPosibles(int id);
 

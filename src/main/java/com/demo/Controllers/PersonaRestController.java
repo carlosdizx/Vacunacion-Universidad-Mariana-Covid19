@@ -167,18 +167,24 @@ public class PersonaRestController
     }
 
     @GetMapping("/posibles")
-    public ResponseEntity<HashMap<String,Object>> findPosibles()
+    public ResponseEntity<HashMap<String,Object>> findPersoonasPosibleAsistencia()
     {
         RESPONSE.clear();
         try
         {
-            final List<Persona> listado = service.findPosibles();
-            if (listado.isEmpty())
+            final List<?> listado = service.findPersoonasPosibleAsistencia();
+            final List<PersonaSencilla> listSencilla = new ArrayList<>();
+            for (int i = 0 ; i < listado.size() ; i++)
+            {
+                final Object[] o = (Object[]) listado.get(i);
+                listSencilla.add(new PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
+            }
+            if (listSencilla.isEmpty())
             {
                 RESPONSE.put("Mensaje","No hay personas que puedan asistir a la Universidad");
                 return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            RESPONSE.put("Lista",listado);
+            RESPONSE.put("Lista",listSencilla);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
@@ -210,7 +216,7 @@ public class PersonaRestController
             final int docentes = service.findTiposPersonas(2).size();
             final int administrativos = service.findTiposPersonas(3).size();
             final int directivos = service.findTiposPersonas(4).size();
-            final int posibles = service.findPosibles().size();
+            final int posibles = service.findPersoonasPosibleAsistencia().size();
             if( total<=0 || total!=(estudiantes+docentes+administrativos+directivos) )
             {
                 RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
@@ -285,7 +291,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = service.findPosibles().size();
+            final int total = service.findPersoonasPosibleAsistencia().size();
             final int educacion = service.findFacultadPersonasPosibles(1).size();
             final int ingenieria = service.findFacultadPersonasPosibles(2).size();
             final int salud = service.findFacultadPersonasPosibles(3).size();
