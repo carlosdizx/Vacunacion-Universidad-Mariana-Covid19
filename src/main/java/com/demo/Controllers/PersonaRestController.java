@@ -28,7 +28,7 @@ public class PersonaRestController
     private IPersonaService service;
 
     @GetMapping("/all")
-    public List<?> findAllData()
+    public List<PersonaSencilla> findAllData()
     {
         final List<?> list = service.findAllData();
         final List<PersonaSencilla> listSencilla = new ArrayList<>();
@@ -84,13 +84,19 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final List<Persona> listado = service.findTiposPersonas(id);
+            final List<?> listado = service.findTiposPersonas(id);
+            final List<PersonaSencilla> listSencilla = new ArrayList<>();
+            for (int i = 0 ; i < listado.size() ; i++)
+            {
+                final Object[] o = (Object[]) listado.get(i);
+                listSencilla.add(new PersonaSencilla((Long) o[0],null,(Programa) o[1],(Estado) o[2]));
+            }
             if (listado.isEmpty())
             {
                 RESPONSE.put("Mensaje","No hay personas del tipo: '"+id+"'");
                 return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            RESPONSE.put("Lista",listado);
+            RESPONSE.put("Lista",listSencilla);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)

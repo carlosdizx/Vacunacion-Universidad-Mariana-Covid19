@@ -44,7 +44,7 @@ public class Persona implements Serializable {
     joinColumns = @JoinColumn(name = "persona_id"),inverseJoinColumns = @JoinColumn(name = "eps_id"),
     uniqueConstraints = {@UniqueConstraint(columnNames = {"persona_id","eps_id"})})
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private List<Eps> epss;
+    private List<Eps> eps;
 
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "estado_id")
@@ -123,12 +123,12 @@ public class Persona implements Serializable {
         this.tipo = tipo;
     }
 
-    public List<Eps> getEpss() {
-        return epss;
+    public List<Eps> getEps() {
+        return eps;
     }
 
-    public void setEpss(List<Eps> epss) {
-        this.epss = epss;
+    public void setEps(List<Eps> eps) {
+        this.eps = eps;
     }
 
     public Estado getEstado() {
