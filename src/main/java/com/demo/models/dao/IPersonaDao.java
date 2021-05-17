@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface IPersonaDao extends CrudRepository<Persona, Long>
+public interface IPersonaDao extends JpaRepository<Persona, Long>
 {
     PersonaSencilla sencilla = null;
 

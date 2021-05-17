@@ -262,5 +262,7 @@ insert into public.convenios (persona_id, eps_id) values (90, 5);
  */
 INSERT INTO convenios (persona_id, eps_id) VALUES (1,2);
 INSERT INTO convenios (persona_id, eps_id) VALUES (1,13);
+INSERT INTO convenios (persona_id, eps_id) VALUES (1,14);
 INSERT INTO convenios (persona_id, eps_id) VALUES (90,2);
+INSERT INTO convenios (persona_id, eps_id) VALUES (90,14);
 INSERT INTO convenios (persona_id, eps_id) VALUES (45,2);
