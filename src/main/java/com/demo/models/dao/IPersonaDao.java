@@ -12,7 +12,10 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
     PersonaSencilla sencilla = null;
 
     @Query("SELECT p.documento, p.tipo,p.programa,p.estado from Persona AS p ORDER BY p.estado.id,p.programa.id")
-    List<?> findAllData();
+    List<?> findAllDataOrderByEstadoAndPrograma();
+
+    @Query("SELECT p.documento, p.tipo,p.programa,p.estado from Persona AS p ORDER BY p.tipo.id,p.estado.id")
+    List<?> findAllDataOrderyByTipoAndEstado();
 
     @Query("from Tipo")
     List<Tipo> findAllTipos();

@@ -17,9 +17,16 @@ public class PersonaServiceImpl implements IPersonaService
 
     @Override
     @Transactional(readOnly = true)
-    public List<?> findAllData()
+    public List<?> findAllDataOrderByEstadoAndPrograma()
     {
-        return dao.findAllData();
+        return dao.findAllDataOrderByEstadoAndPrograma();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<?> findAllDataOrderyByTipoAndEstado()
+    {
+        return dao.findAllDataOrderyByTipoAndEstado();
     }
 
     @Override

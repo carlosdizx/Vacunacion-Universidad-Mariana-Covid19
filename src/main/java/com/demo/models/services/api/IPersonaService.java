@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface IPersonaService
 {
-    List<?> findAllData();
+    List<?> findAllDataOrderByEstadoAndPrograma();
+
+    List<?> findAllDataOrderyByTipoAndEstado();
 
     Persona findById(Long pId );
 

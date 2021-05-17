@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = {"*","http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/personas")
 public class PersonaRestController
@@ -28,9 +28,21 @@ public class PersonaRestController
     private IPersonaService service;
 
     @GetMapping("/all")
-    public List<PersonaSencilla> findAllData()
+    public List<PersonaSencilla> findAllDataOrderByEstadoAndPrograma()
     {
-        final List<?> list = service.findAllData();
+        final List<?> list = service.findAllDataOrderByEstadoAndPrograma();
+        final List<PersonaSencilla> listSencilla = new ArrayList<>();
+        for (int i = 0 ; i < list.size() ; i++)
+        {
+            final Object[] o = (Object[]) list.get(i);
+            listSencilla.add(new PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
+        }
+        return listSencilla;
+    }
+    @GetMapping("/2all")
+    public List<PersonaSencilla> findAllDataOrderyByTipoAndEstado()
+    {
+        final List<?> list = service.findAllDataOrderyByTipoAndEstado();
         final List<PersonaSencilla> listSencilla = new ArrayList<>();
         for (int i = 0 ; i < list.size() ; i++)
         {
@@ -193,7 +205,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = service.findAllData().size();
+            final int total = service.findAllDataOrderByEstadoAndPrograma().size();
             final int estudiantes = service.findTiposPersonas(1).size();
             final int docentes = service.findTiposPersonas(2).size();
             final int administrativos = service.findTiposPersonas(3).size();
@@ -231,7 +243,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = service.findAllData().size();
+            final int total = service.findAllDataOrderByEstadoAndPrograma().size();
             final int desconocidos = service.findEstadosPersonas(1).size();
             final int contagiados = service.findEstadosPersonas(2).size();
             final int saludabes = service.findEstadosPersonas(3).size();
