@@ -310,8 +310,8 @@ public class PersonaRestController
                 RESPONSE.put("Educación", educacion);
                 RESPONSE.put("Ingeniería", ingenieria);
                 RESPONSE.put("Salud", salud);
-                RESPONSE.put("Contables, Economicas y financieras" , contables);
-                RESPONSE.put("Humanidades y Sociales", humanidades);
+                RESPONSE.put("ContablesEconomicasFinancieras" , contables);
+                RESPONSE.put("HumanidadesSociales", humanidades);
                 RESPONSE.put("Administración", administrativas);
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             } else {
@@ -340,7 +340,7 @@ public class PersonaRestController
                 RESPONSE.put("Mensaje", "No hay datos en la base de datos!");
                 return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            RESPONSE.put("Listado",listado);
+            RESPONSE.put("Lista",listado);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)

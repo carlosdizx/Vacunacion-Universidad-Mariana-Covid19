@@ -72,9 +72,10 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
      * WHERE p.estado_id>=5
      * GROUP BY t.nombre,e.nombre;
      */
-    @Query("SELECT count(p) AS cantidad,e.nombre AS estado,t.nombre AS tipo_persona FROM Persona p " +
+    @Query("SELECT new com.demo.models.entity.ResumenTipo(count(p),e.nombre,t.nombre) FROM Persona p " +
             "INNER JOIN Estado e  ON e.id=p.estado.id " +
             "INNER JOIN Tipo t  ON t.id=p.tipo.id " +
-            "GROUP BY t.nombre,e.nombre")
+            "GROUP BY t.nombre,e.nombre " +
+            "ORDER BY t.nombre,e.nombre")
     List<?> countPosiblesTipos();
 }
