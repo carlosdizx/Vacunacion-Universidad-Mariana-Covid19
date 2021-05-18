@@ -241,17 +241,12 @@ public class PersonaRestController
                 RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
                 return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            final String estudiantesPor = DECIMAL_FORMAT.format((double) 100*estudiantes/total);
-            final String docentesPor = DECIMAL_FORMAT.format((double)100*docentes/total);
-            final String administrativosPor = DECIMAL_FORMAT.format((double)100*administrativos/total);
-            final String directivosPor = DECIMAL_FORMAT.format((double)100*directivos/total);
-            final String posiblesPor = DECIMAL_FORMAT.format((double)100*posibles/total);
-            RESPONSE.put("Total 100%",total);
-            RESPONSE.put("Estudiantes "+estudiantesPor+"%",estudiantes);
-            RESPONSE.put("Docentes "+docentesPor+"%",docentes);
-            RESPONSE.put("Administrativos "+administrativosPor+"%",administrativos);
-            RESPONSE.put("Directivos "+directivosPor+"%",directivos);
-            RESPONSE.put("Posibles "+posiblesPor+"%",posibles);
+            RESPONSE.put("Total",total);
+            RESPONSE.put("Estudiantes",estudiantes);
+            RESPONSE.put("Docentes",docentes);
+            RESPONSE.put("Administrativos",administrativos);
+            RESPONSE.put("Directivos",directivos);
+            RESPONSE.put("Posibles",posibles);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
@@ -281,19 +276,13 @@ public class PersonaRestController
                 RESPONSE.put("Mensaje2","Total personas: "+total+", sumatoria: "+(desconocidos+contagiados+saludabes+preContagiados+preVacunados+vacunados));
                 return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            final String desconocidosPor = DECIMAL_FORMAT.format((double) 100*desconocidos/total);
-            final String contagiosPor = DECIMAL_FORMAT.format((double) 100*contagiados/total);
-            final String saludablesPor = DECIMAL_FORMAT.format((double) 100*saludabes/total);
-            final String preContagiadosPor = DECIMAL_FORMAT.format((double) 100*preContagiados/total);
-            final String preVacunadosPor = DECIMAL_FORMAT.format((double) 100*preVacunados/total);
-            final String vacunadosPor = DECIMAL_FORMAT.format((double) 100*vacunados/total);
-            RESPONSE.put("Total 100%",total);
-            RESPONSE.put("Desconocidos "+desconocidosPor+"%",desconocidos);
-            RESPONSE.put("Contagiados "+contagiosPor+"%",contagiados);
-            RESPONSE.put("Saludables "+saludablesPor+"%",saludabes);
-            RESPONSE.put("Anteriormente contagiados "+preContagiadosPor+"%",preContagiados);
-            RESPONSE.put("Pendiente segunda dosis "+preVacunadosPor+"%",preVacunados);
-            RESPONSE.put("Vacunados "+vacunadosPor+"%",vacunados);
+            RESPONSE.put("Total",total);
+            RESPONSE.put("Desconocidos"+"%",desconocidos);
+            RESPONSE.put("Contagiados",contagiados);
+            RESPONSE.put("Saludables",saludabes);
+            RESPONSE.put("Anteriormente contagiados",preContagiados);
+            RESPONSE.put("Pendiente segunda dosis",preVacunados);
+            RESPONSE.put("Vacunados",vacunados);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
