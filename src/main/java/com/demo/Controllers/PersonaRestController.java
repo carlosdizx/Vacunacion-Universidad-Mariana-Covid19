@@ -161,9 +161,9 @@ public class PersonaRestController
     }
 
     @GetMapping("/facultades/{id}")
-    public List<Persona>findFacultadPersonasPosibles(@PathVariable int id)
+    public List<?>findByFacultadPersonasPosibles(@PathVariable int id)
     {
-        return service.findFacultadPersonasPosibles(id);
+        return service.findByFacultadPersonasPosibles(id);
     }
 
     @GetMapping("/posibles")
@@ -194,6 +194,25 @@ public class PersonaRestController
             return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/posiblesFacultades")
+    public ResponseEntity<HashMap<String,Object>> countByTipoAndProgramaAndFacultadPosibles()
+    {
+        RESPONSE.clear();
+        try
+        {
+            final List<?> list = service.countByTipoAndProgramaAndFacultadPosibles();
+            RESPONSE.put("Lista",list);
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje","No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage() ));
+            return new ResponseEntity(RESPONSE,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @GetMapping("/graficas")
     public ResponseEntity<HashMap<String,Object>> graficas()
@@ -292,12 +311,12 @@ public class PersonaRestController
         try
         {
             final int total = service.findPersoonasPosibleAsistencia().size();
-            final int educacion = service.findFacultadPersonasPosibles(1).size();
-            final int ingenieria = service.findFacultadPersonasPosibles(2).size();
-            final int salud = service.findFacultadPersonasPosibles(3).size();
-            final int contables = service.findFacultadPersonasPosibles(4).size();
-            final int humanidades = service.findFacultadPersonasPosibles(5).size();
-            final int administrativas = service.findFacultadPersonasPosibles(6).size();
+            final int educacion = service.findByFacultadPersonasPosibles(1).size();
+            final int ingenieria = service.findByFacultadPersonasPosibles(2).size();
+            final int salud = service.findByFacultadPersonasPosibles(3).size();
+            final int contables = service.findByFacultadPersonasPosibles(4).size();
+            final int humanidades = service.findByFacultadPersonasPosibles(5).size();
+            final int administrativas = service.findByFacultadPersonasPosibles(6).size();
             if (total == (educacion + ingenieria + salud + contables + humanidades + administrativas) && total > 0) {
                 final String educacionPor = DECIMAL_FORMAT.format((double) 100 * educacion / total);
                 final String ingenieriaPor = DECIMAL_FORMAT.format((double) 100 * ingenieria / total);

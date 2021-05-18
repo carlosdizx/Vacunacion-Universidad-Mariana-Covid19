@@ -32,7 +32,9 @@ public interface IPersonaService
 
     List<?>findPersoonasPosibleAsistencia();
 
-    List<Persona>findFacultadPersonasPosibles(int id);
+    List<?>findByFacultadPersonasPosibles(int id);
+
+    List<?>countByTipoAndProgramaAndFacultadPosibles();
 
     List<?> countPosiblesTipos();
 }
