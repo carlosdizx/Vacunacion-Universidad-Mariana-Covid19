@@ -1,4 +1,4 @@
-package com.demo.models.entity;
+package com.demo.models.entity.auxliar;
 
 public class ResumenTipo {
 

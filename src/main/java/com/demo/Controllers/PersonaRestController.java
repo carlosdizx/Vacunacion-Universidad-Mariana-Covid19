@@ -1,17 +1,15 @@
 package com.demo.Controllers;
 
 import com.demo.models.entity.*;
+import com.demo.models.entity.auxliar.PersonaSencilla;
+import com.demo.models.entity.auxliar.Resumen;
 import com.demo.models.services.api.IPersonaService;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,23 +201,8 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = service.findAllDataOrderByEstadoAndPrograma().size();
-            final int estudiantes = service.findTiposPersonas(1).size();
-            final int docentes = service.findTiposPersonas(2).size();
-            final int administrativos = service.findTiposPersonas(3).size();
-            final int directivos = service.findTiposPersonas(4).size();
-            final int posibles = service.findPersoonasPosibleAsistencia().size();
-            if( total<=0 || total!=(estudiantes+docentes+administrativos+directivos) )
-            {
-                RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
-                return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            RESPONSE.put("Total",total);
-            RESPONSE.put("Estudiantes",estudiantes);
-            RESPONSE.put("Docentes",docentes);
-            RESPONSE.put("Administrativos",administrativos);
-            RESPONSE.put("Directivos",directivos);
-            RESPONSE.put("Posibles",posibles);
+            List<Resumen> resumen = service.countByTipo();
+            RESPONSE.put("Resumen",resumen);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
@@ -236,25 +219,8 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = service.findAllDataOrderByEstadoAndPrograma().size();
-            final int desconocidos = service.findEstadosPersonas(1).size();
-            final int contagiados = service.findEstadosPersonas(2).size();
-            final int saludabes = service.findEstadosPersonas(3).size();
-            final int preContagiados = service.findEstadosPersonas(4).size();
-            final int preVacunados = service.findEstadosPersonas(5).size();
-            final int vacunados = service.findEstadosPersonas(6).size();
-            if( total<=0 || total!=(desconocidos+contagiados+saludabes+preContagiados+preVacunados+vacunados) )
-            {
-                RESPONSE.put("Mensaje","No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
-                RESPONSE.put("Mensaje2","Total personas: "+total+", sumatoria: "+(desconocidos+contagiados+saludabes+preContagiados+preVacunados+vacunados));
-                return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            RESPONSE.put("Desconocidos",desconocidos);
-            RESPONSE.put("Contagiados",contagiados);
-            RESPONSE.put("Saludables",saludabes);
-            RESPONSE.put("PreContagiados",preContagiados);
-            RESPONSE.put("PreVacunados",preVacunados);
-            RESPONSE.put("Vacunados",vacunados);
+            final List<Resumen> list = service.countByEstado();
+            RESPONSE.put("Vacunados",list);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
@@ -288,6 +254,11 @@ public class PersonaRestController
                 RESPONSE.put("Administración", administrativas);
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             } else {
+                if (total==0){
+                    RESPONSE.put("Mensaje", "0 (cero) personas podrían asistir a la Universidad Mariana");
+                    return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+
+                }
                 RESPONSE.put("Mensaje", "No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
                 RESPONSE.put("Mensaje2", "Total personas: " + total + ", sumatoria: " + (educacion + ingenieria + salud + contables + humanidades + administrativas));
                 return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);

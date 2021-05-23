@@ -2,6 +2,8 @@ package com.demo.models.services.impl;
 
 import com.demo.models.dao.IPersonaDao;
 import com.demo.models.entity.*;
+import com.demo.models.entity.auxliar.PersonaSencilla;
+import com.demo.models.entity.auxliar.Resumen;
 import com.demo.models.services.api.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,5 +122,16 @@ public class PersonaServiceImpl implements IPersonaService
     public List<?> countPosiblesTipos()
     {
         return dao.countPosiblesTipos();
+    }
+
+    @Override
+    public List<Resumen> countByTipo()
+    {
+        return dao.countByTipo();
+    }
+
+    @Override
+    public List<Resumen> countByEstado() {
+        return dao.countByEstado();
     }
 }

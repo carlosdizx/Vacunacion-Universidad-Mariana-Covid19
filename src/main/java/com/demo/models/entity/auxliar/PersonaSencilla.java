@@ -1,4 +1,8 @@
-package com.demo.models.entity;
+package com.demo.models.entity.auxliar;
+
+import com.demo.models.entity.Estado;
+import com.demo.models.entity.Programa;
+import com.demo.models.entity.Tipo;
 
 import java.io.Serializable;
 
