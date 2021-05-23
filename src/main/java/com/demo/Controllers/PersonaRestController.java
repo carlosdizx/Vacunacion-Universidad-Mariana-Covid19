@@ -28,26 +28,26 @@ public class PersonaRestController
     private IPersonaService service;
 
     @GetMapping("/all")
-    public List<PersonaSencilla> findAllDataOrderByEstadoAndPrograma()
+    public List<Persona.PersonaSencilla> findAllDataOrderByEstadoAndPrograma()
     {
         final List<?> list = service.findAllDataOrderByEstadoAndPrograma();
-        final List<PersonaSencilla> listSencilla = new ArrayList<>();
+        final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
         for (int i = 0 ; i < list.size() ; i++)
         {
             final Object[] o = (Object[]) list.get(i);
-            listSencilla.add(new PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
+            listSencilla.add(new Persona.PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
         }
         return listSencilla;
     }
     @GetMapping("/2all")
-    public List<PersonaSencilla> findAllDataOrderyByTipoAndEstado()
+    public List<Persona.PersonaSencilla> findAllDataOrderyByTipoAndEstado()
     {
         final List<?> list = service.findAllDataOrderyByTipoAndEstado();
-        final List<PersonaSencilla> listSencilla = new ArrayList<>();
+        final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
         for (int i = 0 ; i < list.size() ; i++)
         {
             final Object[] o = (Object[]) list.get(i);
-            listSencilla.add(new PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
+            listSencilla.add(new Persona.PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
         }
         return listSencilla;
     }
@@ -97,11 +97,11 @@ public class PersonaRestController
         try
         {
             final List<?> listado = service.findTiposPersonas(id);
-            final List<PersonaSencilla> listSencilla = new ArrayList<>();
+            final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
             for (int i = 0 ; i < listado.size() ; i++)
             {
                 final Object[] o = (Object[]) listado.get(i);
-                listSencilla.add(new PersonaSencilla((Long) o[0],null,(Programa) o[1],(Estado) o[2]));
+                listSencilla.add(new Persona.PersonaSencilla((Long) o[0],null,(Programa) o[1],(Estado) o[2]));
             }
             if (listado.isEmpty())
             {
@@ -173,11 +173,11 @@ public class PersonaRestController
         try
         {
             final List<?> listado = service.findPersoonasPosibleAsistencia();
-            final List<PersonaSencilla> listSencilla = new ArrayList<>();
+            final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
             for (int i = 0 ; i < listado.size() ; i++)
             {
                 final Object[] o = (Object[]) listado.get(i);
-                listSencilla.add(new PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
+                listSencilla.add(new Persona.PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
             }
             if (listSencilla.isEmpty())
             {

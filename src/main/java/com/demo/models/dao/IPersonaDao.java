@@ -3,13 +3,12 @@ package com.demo.models.dao;
 import com.demo.models.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
 public interface IPersonaDao extends JpaRepository<Persona, Long>
 {
-    PersonaSencilla sencilla = null;
+    Persona.PersonaSencilla sencilla = null;
 
     @Query("SELECT p.documento, p.tipo,p.programa,p.estado from Persona AS p ORDER BY p.estado.id,p.programa.id")
     List<?> findAllDataOrderByEstadoAndPrograma();

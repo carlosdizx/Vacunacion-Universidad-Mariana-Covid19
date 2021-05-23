@@ -46,6 +46,13 @@ public class Persona implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private List<Eps> eps;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "controles",
+            joinColumns = @JoinColumn(name = "persona_id"),inverseJoinColumns = @JoinColumn(name = "control_id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"persona_id","control_id"})})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private List<Dosis> dosis;
+
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "estado_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
@@ -145,5 +152,62 @@ public class Persona implements Serializable {
 
     public void setPrograma(Programa programa) {
         this.programa = programa;
+    }
+
+    public List<Dosis> getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(List<Dosis> dosis) {
+        this.dosis = dosis;
+    }
+
+    public static class PersonaSencilla {
+        private Long documento;
+
+        private Tipo tipo;
+
+        private Programa programa;
+
+        private Estado estado;
+
+        public PersonaSencilla(Long documento, Tipo tipo, Programa programa, Estado estado) {
+            this.documento = documento;
+            this.tipo = tipo;
+            this.programa = programa;
+            this.estado = estado;
+        }
+
+        public Long getDocumento() {
+            return documento;
+        }
+
+        public void setDocumento(Long documento) {
+            this.documento = documento;
+        }
+
+        public Tipo getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(Tipo tipo) {
+            this.tipo = tipo;
+        }
+
+        public Programa getPrograma() {
+            return programa;
+        }
+
+        public void setPrograma(Programa programa) {
+            this.programa = programa;
+        }
+
+        public Estado getEstado() {
+            return estado;
+        }
+
+        public void setEstado(Estado estado) {
+            this.estado = estado;
+        }
     }
 }
