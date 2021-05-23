@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IPersonaService
 {
-    List<?> findAllDataOrderByEstadoAndPrograma();
+    List<PersonaSencilla> findAllDataOrderByEstadoAndPrograma();
 
-    List<?> findAllDataOrderyByTipoAndEstado();
+    List<PersonaSencilla> findAllDataOrderyByTipoAndEstado();
 
     Persona findById(Long pId );
 
@@ -26,13 +26,13 @@ public interface IPersonaService
 
     List<Programa>findAllProgramas();
 
-    List<?>findTiposPersonas(int id);
+    List<PersonaSencilla>findTiposPersonas(int id);
 
-    List<Persona>findEstadosPersonas(int id);
+    List<PersonaSencilla>findEstadosPersonas(int id);
 
-    List<?>findPersoonasPosibleAsistencia();
+    List<PersonaSencilla>findPersoonasPosibleAsistencia();
 
-    List<?>findByFacultadPersonasPosibles(int id);
+    List<PersonaSencilla>findByFacultadPersonasPosibles(int id);
 
     List<?>countByTipoAndProgramaAndFacultadPosibles();
 

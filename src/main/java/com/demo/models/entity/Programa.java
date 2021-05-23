@@ -37,4 +37,12 @@ public class Programa implements Serializable
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Facultad getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
+    }
 }

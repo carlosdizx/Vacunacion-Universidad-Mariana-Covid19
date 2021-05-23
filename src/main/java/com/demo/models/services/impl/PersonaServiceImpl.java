@@ -17,14 +17,14 @@ public class PersonaServiceImpl implements IPersonaService
 
     @Override
     @Transactional(readOnly = true)
-    public List<?> findAllDataOrderByEstadoAndPrograma()
+    public List<PersonaSencilla> findAllDataOrderByEstadoAndPrograma()
     {
         return dao.findAllDataOrderByEstadoAndPrograma();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<?> findAllDataOrderyByTipoAndEstado()
+    public List<PersonaSencilla> findAllDataOrderyByTipoAndEstado()
     {
         return dao.findAllDataOrderyByTipoAndEstado();
     }
@@ -85,27 +85,27 @@ public class PersonaServiceImpl implements IPersonaService
 
     @Override
     @Transactional(readOnly = true)
-    public List<?> findTiposPersonas(int id)
+    public List<PersonaSencilla> findTiposPersonas(int id)
     {
         return dao.findTiposPersonas(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Persona> findEstadosPersonas(int id)
+    public List<PersonaSencilla> findEstadosPersonas(int id)
     {
         return dao.findEstadosPersonas(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<?> findPersoonasPosibleAsistencia()
+    public List<PersonaSencilla> findPersoonasPosibleAsistencia()
     {
         return dao.findPersoonasPosibleAsistencia();
     }
     @Override
     @Transactional(readOnly = true)
-    public List<?>findByFacultadPersonasPosibles(int id)
+    public List<PersonaSencilla>findByFacultadPersonasPosibles(int id)
     {
         return dao.findByFacultadPersonasPosibles(id);
     }

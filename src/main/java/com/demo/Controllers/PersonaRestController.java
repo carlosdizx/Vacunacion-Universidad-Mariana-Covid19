@@ -2,6 +2,7 @@ package com.demo.Controllers;
 
 import com.demo.models.entity.*;
 import com.demo.models.services.api.IPersonaService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpEntity;
@@ -20,36 +21,22 @@ import java.util.Map;
 @RequestMapping("/personas")
 public class PersonaRestController
 {
-    final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###.##");
+    // final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###.##");
 
     final static Map<String,Object> RESPONSE = new HashMap<>();
 
     @Autowired
     private IPersonaService service;
 
-    @GetMapping("/all")
-    public List<Persona.PersonaSencilla> findAllDataOrderByEstadoAndPrograma()
+    @GetMapping("/all/estadoPrograma")
+    public List<PersonaSencilla> findAllDataOrderByEstadoAndPrograma()
     {
-        final List<?> list = service.findAllDataOrderByEstadoAndPrograma();
-        final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
-        for (int i = 0 ; i < list.size() ; i++)
-        {
-            final Object[] o = (Object[]) list.get(i);
-            listSencilla.add(new Persona.PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
-        }
-        return listSencilla;
+        return service.findAllDataOrderByEstadoAndPrograma();
     }
-    @GetMapping("/2all")
-    public List<Persona.PersonaSencilla> findAllDataOrderyByTipoAndEstado()
+    @GetMapping("/all/tipoEstado")
+    public List<PersonaSencilla> findAllDataOrderyByTipoAndEstado()
     {
-        final List<?> list = service.findAllDataOrderyByTipoAndEstado();
-        final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
-        for (int i = 0 ; i < list.size() ; i++)
-        {
-            final Object[] o = (Object[]) list.get(i);
-            listSencilla.add(new Persona.PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
-        }
-        return listSencilla;
+        return service.findAllDataOrderyByTipoAndEstado();
     }
 
     @GetMapping("/{documento}")
@@ -96,19 +83,13 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final List<?> listado = service.findTiposPersonas(id);
-            final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
-            for (int i = 0 ; i < listado.size() ; i++)
-            {
-                final Object[] o = (Object[]) listado.get(i);
-                listSencilla.add(new Persona.PersonaSencilla((Long) o[0],null,(Programa) o[1],(Estado) o[2]));
-            }
+            final List<PersonaSencilla> listado = service.findTiposPersonas(id);
             if (listado.isEmpty())
             {
                 RESPONSE.put("Mensaje","No hay personas del tipo: '"+id+"'");
                 return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            RESPONSE.put("Lista",listSencilla);
+            RESPONSE.put("Lista",listado);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
@@ -137,7 +118,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final List<Persona> listado = service.findEstadosPersonas(id);
+            final List<PersonaSencilla> listado = service.findEstadosPersonas(id);
             if (listado.isEmpty())
             {
                 RESPONSE.put("Mensaje","No hay personas en el estado: '"+id+"'");
@@ -160,10 +141,18 @@ public class PersonaRestController
         return service.findAllFacultades();
     }
 
-    @GetMapping("/facultades/{id}")
-    public List<?>findByFacultadPersonasPosibles(@PathVariable int id)
+    @GetMapping("posible/facultades/{id}")
+    public ResponseEntity<HashMap<String,Object>>findByFacultadPersonasPosibles(@PathVariable int id)
     {
-        return service.findByFacultadPersonasPosibles(id);
+        RESPONSE.clear();
+        final List<PersonaSencilla> list = service.findByFacultadPersonasPosibles(id);
+        if (list.isEmpty())
+        {
+            RESPONSE.put("Mensaje","No hay personas posibles en la facultad con el id: '"+id+"'");
+            return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
+        }
+        RESPONSE.put("Lista",list);
+        return new ResponseEntity(RESPONSE, HttpStatus.OK);
     }
 
     @GetMapping("/posibles")
@@ -172,19 +161,13 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final List<?> listado = service.findPersoonasPosibleAsistencia();
-            final List<Persona.PersonaSencilla> listSencilla = new ArrayList<>();
-            for (int i = 0 ; i < listado.size() ; i++)
-            {
-                final Object[] o = (Object[]) listado.get(i);
-                listSencilla.add(new Persona.PersonaSencilla((Long) o[0],(Tipo) o[1],(Programa) o[2],(Estado) o[3]));
-            }
-            if (listSencilla.isEmpty())
+            final List<PersonaSencilla> listado = service.findPersoonasPosibleAsistencia();
+            if (listado.isEmpty())
             {
                 RESPONSE.put("Mensaje","No hay personas que puedan asistir a la Universidad");
                 return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            RESPONSE.put("Lista",listSencilla);
+            RESPONSE.put("Lista",listado);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
@@ -213,16 +196,6 @@ public class PersonaRestController
         }
     }
 
-
-    @GetMapping("/graficas")
-    public ResponseEntity<HashMap<String,Object>> graficas()
-    {
-        final HashMap<String,Object> hashMap = new HashMap<>();
-        hashMap.put("Grafico 1",graficOne().getBody());
-        hashMap.put("Grafico 2",graficTwo().getBody());
-        hashMap.put("Grafico 3",graficThree().getBody());
-        return new ResponseEntity(hashMap, HttpStatus.OK);
-    }
 
     @GetMapping("/graficas/1")
     public ResponseEntity<HashMap<String,Object>> graficOne()
