@@ -163,7 +163,7 @@ public class PersonaRestController
             if (listado.isEmpty())
             {
                 RESPONSE.put("Mensaje","No hay personas que puedan asistir a la Universidad");
-                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
+                return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
             RESPONSE.put("Lista",listado);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
@@ -182,7 +182,7 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final List<?> list = service.countByTipoAndProgramaAndFacultadPosibles();
+            final List<Resumen> list = service.countByTipoAndProgramaAndFacultadPosibles();
             RESPONSE.put("Lista",list);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }

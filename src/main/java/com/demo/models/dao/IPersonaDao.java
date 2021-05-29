@@ -85,14 +85,15 @@ public interface IPersonaDao extends JpaRepository<Persona, Long>
      * GROUP BY t.nombre,f.nombre,t.id,prog.nombre
      * ORDER BY f.nombre,t.nombre;
      */
-    @Query(value = "SELECT t.nombre,count(p),prog.nombre, f.nombre FROM Persona p " +
+    @Query(value = "SELECT new com.demo.models.entity.auxliar.Resumen(concat(f.nombre,'-',t.nombre),count(p) )" +
+            "FROM Persona p " +
+            "INNER JOIN Tipo t ON t.id = p.tipo.id " +
             "INNER JOIN Programa prog ON prog.id = p.programa.id " +
             "INNER JOIN Facultad f ON f.id = prog.facultad.id " +
-            "INNER JOIN Tipo t ON t.id = p.tipo.id " +
             "WHERE p.estado.id>=5 " +
-            "GROUP BY t.nombre,f.nombre,t.id,prog.nombre " +
+            "GROUP BY f.nombre,t.nombre " +
             "ORDER BY f.nombre")
-    List<?> countByTipoAndProgramaAndFacultadPosibles();
+    List<Resumen> countByTipoAndProgramaAndFacultadPosibles();
 
     /**
      * SELECT count(*) AS cantiada,e.nombre,t.nombre FROM personas p

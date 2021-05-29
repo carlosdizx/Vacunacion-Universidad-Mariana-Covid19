@@ -113,7 +113,8 @@ public class PersonaServiceImpl implements IPersonaService
     }
 
     @Override
-    public List<?> countByTipoAndProgramaAndFacultadPosibles() {
+    public List<Resumen> countByTipoAndProgramaAndFacultadPosibles()
+    {
         return dao.countByTipoAndProgramaAndFacultadPosibles();
     }
 

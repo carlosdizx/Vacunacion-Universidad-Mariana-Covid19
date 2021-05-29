@@ -36,7 +36,7 @@ public interface IPersonaService
 
     List<PersonaSencilla>findByFacultadPersonasPosibles(int id);
 
-    List<?>countByTipoAndProgramaAndFacultadPosibles();
+    List<Resumen>countByTipoAndProgramaAndFacultadPosibles();
 
     List<?> countPosiblesTipos();
 
