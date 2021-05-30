@@ -135,4 +135,10 @@ public class PersonaServiceImpl implements IPersonaService
     public List<Resumen> countByEstado() {
         return dao.countByEstado();
     }
+
+    @Override
+    public List<Resumen> countPersonaByEstadoAndFacultad()
+    {
+        return dao.countPersonaByEstadoAndFacultad();
+    }
 }

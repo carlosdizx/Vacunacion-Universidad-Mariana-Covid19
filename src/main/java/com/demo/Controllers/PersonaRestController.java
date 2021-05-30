@@ -220,7 +220,7 @@ public class PersonaRestController
         try
         {
             final List<Resumen> list = service.countByEstado();
-            RESPONSE.put("Vacunados",list);
+            RESPONSE.put("Resumen",list);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         }
         catch (DataAccessException e)
@@ -237,32 +237,14 @@ public class PersonaRestController
         RESPONSE.clear();
         try
         {
-            final int total = service.findPersoonasPosibleAsistencia().size();
-            final int educacion = service.findByFacultadPersonasPosibles(1).size();
-            final int ingenieria = service.findByFacultadPersonasPosibles(2).size();
-            final int salud = service.findByFacultadPersonasPosibles(3).size();
-            final int contables = service.findByFacultadPersonasPosibles(4).size();
-            final int humanidades = service.findByFacultadPersonasPosibles(5).size();
-            final int administrativas = service.findByFacultadPersonasPosibles(6).size();
-            if (total == (educacion + ingenieria + salud + contables + humanidades + administrativas) && total > 0) {
-                RESPONSE.put("Total", total);
-                RESPONSE.put("Educación", educacion);
-                RESPONSE.put("Ingeniería", ingenieria);
-                RESPONSE.put("Salud", salud);
-                RESPONSE.put("ContablesEconomicasFinancieras" , contables);
-                RESPONSE.put("HumanidadesSociales", humanidades);
-                RESPONSE.put("Administración", administrativas);
-                return new ResponseEntity(RESPONSE, HttpStatus.OK);
-            } else {
-                if (total==0){
-                    RESPONSE.put("Mensaje", "0 (cero) personas podrían asistir a la Universidad Mariana");
-                    return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
-
-                }
-                RESPONSE.put("Mensaje", "No hay personas registradas en las bases de datos, o los datos cargados son incorrectos!");
-                RESPONSE.put("Mensaje2", "Total personas: " + total + ", sumatoria: " + (educacion + ingenieria + salud + contables + humanidades + administrativas));
-                return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+            final List<Resumen> list = service.countPersonaByEstadoAndFacultad();
+            if (list.isEmpty())
+            {
+                RESPONSE.put("Mensaje","No hay facultades que tengan la posibilidad de asistir a la Universidad Mariana");
+                return new ResponseEntity(RESPONSE,HttpStatus.OK);
             }
+            RESPONSE.put("Resumen",list);
+            return new ResponseEntity(RESPONSE,HttpStatus.OK);
         }
         catch (DataAccessException e)
         {

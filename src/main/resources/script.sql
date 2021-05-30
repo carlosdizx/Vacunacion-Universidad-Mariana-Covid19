@@ -51,3 +51,34 @@ GROUP BY f.nombre;
 SELECT count(*) AS cantidad,e.nombre FROM personas
                                               INNER JOIN estados e on e.id = personas.estado_id
 GROUP BY e.nombre;
+
+/**
+  para cambiar el estado/situacion en que se encuentran las personas
+ */
+CREATE OR REPLACE FUNCTION aletorios() RETURNS void
+AS
+$$
+UPDATE personas SET estado_id = round(5) * random() + 1;
+$$
+Language SQL;
+
+SELECT aletorios();
+
+/**
+  cuenta las personas que pueden ir a la U sin correr riesgo
+ */
+
+SELECT count(p)
+FROM personas p
+WHERE p.estado_id>=5;
+
+/**
+  cuenta las personas que pueden ir a la U sin correr riesgo por facultades
+ */
+SELECT f.nombre,count(p)
+FROM personas p
+         INNER JOIN programas p2 on p2.id = p.programa_id
+         INNER JOIN facultades f on f.id = p2.facultad_id
+WHERE p.estado_id>=5
+GROUP BY f.nombre
+ORDER BY f.nombre;

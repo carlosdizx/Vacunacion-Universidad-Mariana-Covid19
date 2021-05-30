@@ -43,4 +43,6 @@ public interface IPersonaService
     List<Resumen> countByTipo();
 
     List<Resumen> countByEstado();
+
+    List<Resumen>countPersonaByEstadoAndFacultad();
 }
