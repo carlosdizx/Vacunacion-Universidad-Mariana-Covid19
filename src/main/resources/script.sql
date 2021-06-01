@@ -82,3 +82,26 @@ FROM personas p
 WHERE p.estado_id>=5
 GROUP BY f.nombre
 ORDER BY f.nombre;
+
+
+/**
+  como convertir los datos de una tabla (personas) en un json
+ */
+
+CREATE OR REPLACE FUNCTION convertir_a_json()
+    RETURNS json as $$
+DECLARE
+    respuesta json;
+begin
+    SELECT  array_to_json(array_agg(row_to_json(datos.*)))
+    FROM(
+            SELECT *
+            FROM personas
+            ORDER BY apellidos,nombres
+        ) AS datos INTO respuesta;
+    return respuesta;
+end;
+$$
+    LANGUAGE plpgsql;
+
+SELECT convertir_a_json();
