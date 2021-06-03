@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = {"http://localhost:4200","https://trazabilidad-vacuna-covid19-umariana.netlify.app/"})
+@CrossOrigin(origins = {"*","https://trazabilidad-vacuna-covid19-umariana.netlify.app/"})
 @RestController
 @RequestMapping("/personas")
 public class PersonaRestController
