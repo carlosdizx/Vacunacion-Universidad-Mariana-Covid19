@@ -44,11 +44,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.universidad.mariana.ingenieria.sistemas</groupId>
-            <artifactId>demo</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-core</artifactId>
